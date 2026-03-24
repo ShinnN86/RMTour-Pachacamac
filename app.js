@@ -17,7 +17,7 @@ const togglePanelBtn = document.getElementById("togglePanelBtn");
 
 async function init() {
   try {
-    const response = await fetch("manifest.json");
+    const response = await fetch("Manifest.json");
     if (!response.ok) {
       throw new Error("No se pudo cargar manifest.json");
     }
