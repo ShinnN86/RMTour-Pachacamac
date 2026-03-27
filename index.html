@@ -2,11 +2,18 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tour 360 - Tipon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tour 360 - Pachacamac</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
+  />
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html, body {
       margin: 0;
@@ -22,6 +29,7 @@
       position: relative;
       width: 100%;
       height: 100vh;
+      background: black;
     }
 
     #panorama {
@@ -29,22 +37,27 @@
       height: 100%;
     }
 
-    /* PANEL */
+    /* PANEL FLOTANTE */
     #overlayPanel {
       position: absolute;
-      top: 18px;
-      left: 18px;
-      width: 340px;
-      max-height: calc(100vh - 36px);
-      background: rgba(18,30,34,0.82);
-      backdrop-filter: blur(12px);
-      border-radius: 22px;
-      padding-bottom: 12px;
-      z-index: 20;
+      top: 14px;
+      left: 50px;
+      z-index: 30;
+      width: 320px;
+      max-height: calc(100vh - 28px);
+      background: rgba(31, 147, 151, 0.82);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
     }
 
     #panelHeader {
       padding: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -59,305 +72,155 @@
     #projectSubtitle {
       margin: 4px 0 0;
       font-size: 12px;
-      opacity: 0.8;
+      color: rgba(255,255,255,0.7);
     }
 
-    .icon-btn {
-      width: 38px;
-      height: 38px;
+    #togglePanelBtn {
       border: none;
       border-radius: 10px;
-      background: rgba(255,255,255,0.1);
-      color: white;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
       cursor: pointer;
     }
 
-    #menuContent {
-      padding: 0 12px;
+    #zoneList {
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 40vh;
     }
 
-    /* DROPDOWN */
-    .menu-dropdown-btn {
-      width: 100%;
+    .zone-button {
       border: none;
-      border-radius: 14px;
-      padding: 12px;
+      border-radius: 10px;
+      padding: 10px;
       background: rgba(255,255,255,0.08);
       color: white;
       cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: left;
     }
 
-    .menu-dropdown-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .menu-badge {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
+    .zone-button:hover {
       background: rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .chevron {
-      transition: transform 0.2s;
+    .zone-button.active {
+      background: #0d6efd;
     }
 
-    .chevron.rotated {
-      transform: rotate(180deg);
-    }
-
-    /* LISTA */
-    .lugares-list {
-      max-height: 0;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: all 0.3s;
-      opacity: 0;
-    }
-
-    .lugares-list.open {
-      max-height: 500px;
-      opacity: 1;
-      margin-top: 10px;
-    }
-
-    .lugar-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px;
-      border-radius: 14px;
-      border: none;
-      background: rgba(255,255,255,0.06);
-      color: white;
-      cursor: pointer;
-    }
-
-    .lugar-item:hover {
-      background: rgba(255,255,255,0.12);
-    }
-
-    .lugar-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #00bcd4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-
-    /* SCENE PANEL */
     #scenePanel {
-      margin-top: 10px;
-      padding: 12px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 14px;
+      padding: 10px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    #sceneTitle {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    #sceneInfo {
+      font-size: 12px;
+      margin-bottom: 10px;
+      color: rgba(255,255,255,0.7);
     }
 
     .ctrl-btn {
       border: none;
-      padding: 8px;
-      margin: 4px;
       border-radius: 8px;
+      padding: 8px;
       background: rgba(255,255,255,0.1);
       color: white;
       cursor: pointer;
     }
 
-    /* MODAL */
-    .modal-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
+    .ctrl-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* HOTSPOTS */
+    .custom-hotspot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #0d6efd;
+      border: 2px solid #fff;
+      cursor: pointer;
+    }
+
+    .custom-hotspot::after {
+      content: "➜";
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 100;
+      width: 100%;
+      height: 100%;
+      color: white;
+      font-weight: bold;
     }
 
-    .modal-overlay.hidden {
+    /* OCULTAR ELEMENTOS PANNELLUM */
+    .pnlm-title-box,
+    .pnlm-load-box,
+    .pnlm-loading {
+      display: none !important;
+    }
+
+    /* COLAPSADO */
+    #overlayPanel.collapsed {
+      width: auto;
+      background:rgba(31, 147, 151, 0.82);
+      backdrop-filter: blur(8px);
+      border: none;
+      box-shadow: none;
+    }
+
+    #overlayPanel.collapsed #zoneList,
+    #overlayPanel.collapsed #scenePanel,
+    #overlayPanel.collapsed #projectSubtitle {
       display: none;
     }
 
-    .info-card {
-      background: white;
-      color: black;
-      padding: 20px;
-      border-radius: 16px;
-      width: 300px;
+    @media (max-width: 768px) {
+      #overlayPanel {
+        width: calc(100% - 28px);
+      }
     }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-
-    /* 🎯 PUNTERO */
-    #centerPointer {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 50;
-      pointer-events: none;
-    }
-
-    .pointer-ring {
-      width: 20px;
-      height: 20px;
-      border: 2px solid white;
-      border-radius: 50%;
-    }
-
-    .pointer-dot {
-      width: 5px;
-      height: 5px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    #centerPointer.active .pointer-ring {
-      border-color: #00e5ff;
-      transform: scale(1.2);
-    }
-
-    #centerPointer.active .pointer-dot {
-      background: #00e5ff;
-    }
-
   </style>
-
-  <!-- IMPORTMAP -->
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
- 
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.152.2/examples/jsm/"
-    }
-  }
-  </script>
-
 </head>
 
 <body>
 
-<div id="viewerWrap">
+  <div id="viewerWrap">
+    <div id="panorama"></div>
 
-  <div id="panorama"></div>
-
-  <!-- 🎯 PUNTERO -->
-  <div id="centerPointer">
-    <div class="pointer-ring"></div>
-    <div class="pointer-dot"></div>
-  </div>
-
-  <!-- PANEL -->
-  <div id="overlayPanel">
-
-    <div id="panelHeader">
-      <div>
-        <h1 id="projectTitle">Cargando...</h1>
-        <p id="projectSubtitle">Tour VR</p>
-      </div>
-      <button id="togglePanelBtn" class="icon-btn">☰</button>
-    </div>
-
-    <div id="menuContent">
-
-      <!-- LUGARES -->
-      <button id="lugaresToggleBtn" class="menu-dropdown-btn">
-        <div class="menu-dropdown-left">
-          <div class="menu-badge">📍</div>
-          Lugares
+    <!-- PANEL FLOTANTE -->
+    <div id="overlayPanel">
+      <div id="panelHeader">
+        <div>
+          <h1 id="projectTitle">Cargando...</h1>
+          <p id="projectSubtitle">Tour virtual 360</p>
         </div>
-        <div id="lugaresChevron" class="chevron">▼</div>
-      </button>
-
-      <div id="lugaresList" class="lugares-list">
-
-        <button class="lugar-item" data-zona="zona1">
-          <div class="lugar-icon">1</div>
-          Ingreso
-        </button>
-
-        <button class="lugar-item" data-zona="zona2">
-          <div class="lugar-icon">2</div>
-          Andenes
-        </button>
-
-        <button class="lugar-item" data-zona="zona3">
-          <div class="lugar-icon">3</div>
-          Canales
-        </button>
-
-        <button class="lugar-item" data-zona="zona1">
-          <div class="lugar-icon">4</div>
-          Vista Alta
-        </button>
-
-        <button class="lugar-item" data-zona="zona2">
-          <div class="lugar-icon">5</div>
-          Lateral
-        </button>
-
-        <button class="lugar-item" data-zona="zona3">
-          <div class="lugar-icon">6</div>
-          Ceremonial
-        </button>
-
-        <button class="lugar-item" data-zona="zona1">
-          <div class="lugar-icon">7</div>
-          Panorámica
-        </button>
-
+        <button id="togglePanelBtn">☰</button>
       </div>
 
-      <!-- CONTROLES -->
+      <div id="zoneList"></div>
+
       <div id="scenePanel">
         <p id="sceneTitle">Sin escena</p>
         <p id="sceneInfo">Selecciona una zona</p>
 
-        <button class="ctrl-btn" id="prevBtn">Anterior</button>
-        <button class="ctrl-btn" id="nextBtn">Siguiente</button>
-        <button class="ctrl-btn" id="fullscreenBtn">Pantalla</button>
-        <button class="ctrl-btn" id="infoBtn">Info</button>
-        <button class="ctrl-btn" id="gyroBtn">Giroscopio</button>
-        
+        <button class="ctrl-btn" id="prevBtn">Anteriror</button>
+        <button class="ctrl-btn" id="nextBtn">Siguente</button>
+        <button class="ctrl-btn" id="fullscreenBtn">⛶ Pantalla Completa</button>
       </div>
-
     </div>
   </div>
 
-  <!-- MODAL -->
-  <div id="infoModalOverlay" class="modal-overlay hidden">
-    <div class="info-card">
-      <button id="closeInfoBtn">X</button>
-      <h2 id="infoCardTitle"></h2>
-      <p id="infoCardContent"></p>
-    </div>
-  </div>
-
-</div>
-
-<script type="module" src="./app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+  <script src="app.js"></script>
 
 </body>
 </html>
