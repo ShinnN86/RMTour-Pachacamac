@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tour 360 - Pachacamac</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+    }
+
+    #viewerWrap {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    #panorama {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* PANEL GENERAL */
+    #overlayPanel {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 350px;
+      max-height: calc(100vh - 36px);
+      background: rgba(18, 30, 34, 0.78);
+      backdrop-filter: blur(14px);
+      border-radius: 24px;
+      z-index: 20;
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.28s ease, opacity 0.22s ease;
+      transform-origin: top left;
+    }
+
+    #overlayPanel.collapsed {
+      transform: translateX(-82%);
+    }
+
+    #overlayPanel.collapsed #menuContent {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #panelHeader {
+      padding: 18px 18px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #projectTitle {
+      margin: 0;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    #projectSubtitle {
+      margin: 4px 0 0;
+      font-size: 12px;
+      opacity: 0.78;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #menuContent {
+      padding: 0 16px 16px;
+      overflow-y: auto;
+      max-height: calc(100vh - 100px);
+      transition: opacity 0.2s ease;
+    }
+
+    .menu-section {
+      padding: 14px 0;
+    }
+
+    .menu-section+.menu-section {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .section-label {
+      margin: 0 0 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
+
+    #scenePanel {
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      margin-top: 0;
+    }
+
+    #sceneTitle {
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    #sceneInfo {
+      margin: 0 0 14px;
+      font-size: 13px;
+      line-height: 1.4;
+      opacity: 0.82;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .ctrl-btn {
+      border: none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.09);
+      color: white;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .lugares-wrapper {
+      padding-top: 2px;
+    }
+
+    .menu-dropdown-btn {
+      width: 100%;
+      border: none;
+      border-radius: 0;
+      padding: 6px 0 10px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-dropdown-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .menu-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .chevron {
+      transition: transform 0.22s ease;
+      opacity: 0.8;
+      font-size: 14px;
+    }
+
+    .chevron.rotated {
+      transform: rotate(180deg);
+    }
+
+    .lugares-list {
+      max-height: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      opacity: 0;
+      transition: max-height 0.28s ease, opacity 0.22s ease, margin-top 0.22s ease;
+      margin-top: 0;
+    }
+
+    .lugares-list.open {
+      max-height: 520px;
+      opacity: 1;
+      margin-top: 6px;
+    }
+
+    .lugar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 4px;
+      border: none;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      text-align: left;
+      border-radius: 12px;
+      transition: background 0.18s ease, padding-left 0.18s ease;
+    }
+
+    .lugar-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      padding-left: 8px;
+    }
+
+    .lugar-item.active {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .lugar-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    }
+
+    .lugar-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .lugar-text {
+      font-size: 14px;
+      line-height: 1.2;
+      opacity: 0.96;
+    }
+
+    /* MINI MAPA */
+    #miniMap {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      width: 300px;
+      background: rgba(18, 30, 34, 0.82);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      overflow: hidden;
+      z-index: 25;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+    }
+
+    .mini-map-header {
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      background: rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #expandMapBtn {
+      border: none;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    #miniMapCanvas {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    #miniMapImage {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .map-point {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      transform: translate(-50%, -50%);
+      border: none;
+      border-radius: 50%;
+      background: #00d5ff;
+      box-shadow: 0 0 0 4px rgba(0, 213, 255, 0.2);
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .map-point:hover {
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+
+    .map-point.active {
+      background: #00ffcc;
+      box-shadow: 0 0 0 4px rgba(0, 255, 204, 0.25);
+    }
+
+    #gpsMarker {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: #ff3b30;
+      box-shadow:
+        0 0 0 4px rgba(255, 59, 48, 0.2),
+        0 0 18px rgba(255, 59, 48, 0.45);
+      z-index: 3;
+      transition: left 0.35s ease, top 0.35s ease;
+    }
+
+    #gpsMarker::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    /* MAPA GRANDE */
+    /* OVERLAY */
+    .map-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+    }
+
+    .map-overlay.hidden {
+      display: none;
+    }
+
+    /* MAPA GRANDE */
+    .map-expanded {
+      width: 85%;
+      max-width: 900px;
+      height: auto;
+      background: rgba(20, 30, 35, 0.95);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    .map-expanded-header {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: bold;
+    }
+
+    #closeMapBtn {
+      border: none;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    /* CONTENIDO */
+    .map-expanded-content {
+      flex: 1;
+      position: relative;
+    }
+
+    /* CLON DEL MAPA */
+    .map-expanded-content #miniMapCanvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-expanded-content img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .map-stage {
+      position: relative;
+      width: min(100%, 900px);
+      height: auto;
+      aspect-ratio: 16 / 9;
+    }
+
+    .map-stage #miniMapCanvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-stage #miniMapImage {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      display: block;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .modal-overlay.hidden {
+      display: none;
+    }
+
+    .info-card {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 16px;
+      width: 300px;
+      position: relative;
+    }
+
+    /* PUNTERO */
+    #centerPointer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .pointer-ring {
+      width: 20px;
+      height: 20px;
+      border: 2px solid white;
+      border-radius: 50%;
+    }
+
+    .pointer-dot {
+      width: 5px;
+      height: 5px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #centerPointer.active .pointer-ring {
+      border-color: #00e5ff;
+      transform: scale(1.2);
+    }
+
+    #centerPointer.active .pointer-dot {
+      background: #00e5ff;
+    }
+
+    .lugar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 4px;
+      border: none;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      text-align: left;
+      border-radius: 12px;
+      transition: background 0.18s ease, padding-left 0.18s ease;
+      text-decoration: none;
+    }
+   
+  </style>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <div id="viewerWrap">
+
+    <div id="panorama"></div>
+
+    <div id="centerPointer">
+      <div class="pointer-ring"></div>
+      <div class="pointer-dot"></div>
+    </div>
+
+    <div id="overlayPanel">
+
+      <div id="panelHeader">
+        <div>
+          <h1 id="projectTitle">Cargando...</h1>
+          <p id="projectSubtitle">Tour VR</p>
+        </div>
+        <button id="togglePanelBtn" class="icon-btn">☰</button>
+      </div>
+
+      <div id="menuContent">
+
+        <div class="menu-section">
+          <p class="section-label">Visor</p>
+
+          <div id="scenePanel">
+            <p id="sceneTitle">Sin escena</p>
+            <p id="sceneInfo">Selecciona una zona</p>
+
+            <div class="controls-grid">
+              <button class="ctrl-btn" id="prevBtn">Anterior</button>
+              <button class="ctrl-btn" id="nextBtn">Siguiente</button>
+              <button class="ctrl-btn" id="fullscreenBtn">Pantalla</button>
+              <button class="ctrl-btn" id="infoBtn">Info</button>
+              <button class="ctrl-btn" id="gyroBtn">Giroscopio</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section lugares-wrapper">
+          <p class="section-label">Exploración</p>
+
+          <button id="lugaresToggleBtn" class="menu-dropdown-btn">
+            <div class="menu-dropdown-left">
+              <div class="menu-badge">📍</div>
+              <span>Lugares</span>
+            </div>
+            <div id="lugaresChevron" class="chevron">▼</div>
+          </button>
+
+          <div id="lugaresList" class="lugares-list">
+            <a class="lugar-item" href="http://localhost:8000/Cusco/">
+              <div class="lugar-icon">
+                <img src="../iconos/Tipon.jpg" alt="Tipón">
+              </div>
+              <div class="lugar-text">Tipón</div>
+            </a>
+
+            <a class="lugar-item" href="http://localhost:8000/Pachacamac/">
+              <div class="lugar-icon">
+                <img src="../iconos/Pachacamac.jpg" alt="Pachacamac">
+              </div>
+              <div class="lugar-text">Pachacamac</div>
+            </a>
+            <a class="lugar-item" href="">
+              <div class="lugar-icon">
+                <img src="../iconos/Raqchi.jpg" alt="Raqchi">
+              </div>
+              <div class="lugar-text">Raqchi</div>
+            </a>
+            <a class="lugar-item" href="">
+              <div class="lugar-icon">
+                <img src="../iconos/Caral.jpg" alt="Caral">
+              </div>
+              <div class="lugar-text">Caral</div>
+            </a>
+            <a class="lugar-item" href="">
+              <div class="lugar-icon">
+                <img src="../iconos/Saqsaywaman.jpg" alt="Sacsayhuamán">
+              </div>
+              <div class="lugar-text">Sacsayhuamán</div>
+            </a>
+             <a class="lugar-item" href="">
+              <div class="lugar-icon">
+                <img src="" alt="San Francisco">
+              </div>
+              <div class="lugar-text">San Francisco</div>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="miniMap">
+      <div class="mini-map-header">
+        <span>Mapa</span>
+        <button id="expandMapBtn">⛶</button>
+      </div>
+
+      <div id="miniMapCanvas">
+        <img id="miniMapImage" src="../mapa/Pachacamac.png" alt="Mapa de navegación">
+
+        <button class="map-point" data-zona="zona1" style="left: 38%; top: 15%;" title="Ingreso"></button>
+        <button class="map-point" data-zona="zona2" style="left: 43%; top: 12%;" title="Andenes"></button>
+        <button class="map-point" data-zona="zona3" style="left: 48%; top: 7%;" title="Canales"></button>
+        <button class="map-point" data-zona="zona4" style="left: 65%; top: 22%;" title="Vista Alta"></button>
+        <button class="map-point" data-zona="zona5" style="left: 64%; top: 43%;" title="Panorámica"></button>
+        <button class="map-point" data-zona="zona6" style="left: 57%; top: 57%;" title="Canales"></button>
+        <button class="map-point" data-zona="zona7" style="left: 59%; top: 63%;" title="Vista Alta"></button>
+        <button class="map-point" data-zona="zona8" style="left: 55%; top: 82%;" title="Panorámica"></button>
+        <button class="map-point" data-zona="zona9" style="left: 32%; top: 22%;" title="Panorámica"></button>
+
+        <div id="gpsMarker"></div>
+      </div>
+    </div>
+
+    <div id="mapOverlay" class="map-overlay hidden">
+      <div class="map-expanded">
+
+        <div class="map-expanded-header">
+          <span>Mapa de navegación</span>
+          <button id="closeMapBtn">✕</button>
+        </div>
+
+        <div class="map-expanded-content" id="mapExpandedContent">
+          <!-- aquí se clona el mapa -->
+        </div>
+
+      </div>
+    </div>
+    
+
+    <div id="infoModalOverlay" class="modal-overlay hidden">
+      <div class="info-card">
+        <button id="closeInfoBtn">X</button>
+        <h2 id="infoCardTitle"></h2>
+        <p id="infoCardContent"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+
+</html>
