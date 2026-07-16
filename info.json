@@ -1,0 +1,140 @@
+{
+  "zona1": [
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "Casa de las escogidas",
+      "descripcion": "Acllawasi, también conocido como Casa de las Escogidas, era un espacio destinado a mujeres seleccionadas para servir al Estado Inca. Estas mujeres elaboraban textiles finos, preparaban ofrendas y participaban en ceremonias religiosas.",
+
+      "imagen": "Aclla.jpg",
+
+      "modeloUrl": "https://shinnn86.github.io/Rampa/",
+
+      "audio": "audio/acllawasi.mp3",
+        "mostrarHotspot": true
+    },
+
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "Vista Interior",
+      "descripcion": "Descripción de la escena 2.",
+
+      "imagen": "imagenes/acllawasi2.jpg",
+
+      "modeloUrl": "https://shinnn86.github.io/Rampa/",
+
+      "audio": "",
+        "mostrarHotspot": false
+    },
+
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "Vista General",
+      "descripcion": "Descripción de la escena 3.",
+
+      "imagen": "",
+
+      "modelo": "",
+
+      "audio": "audio/acllawasi.mp3",
+        "mostrarHotspot": true
+    }
+  ],
+
+  "zona2": [
+    {
+      "titulo": "Piramide Con Rampa",
+      "subtitulo": "Rampa 1",
+      "descripcion": "",
+
+      "imagen": "",
+
+      "modelo": "",
+
+      "audio": "",
+       "mostrarHotspot": false
+    },
+    {
+      "titulo": "Piramide Con Rampa",
+      "subtitulo": "Rampa 1",
+      "descripcion": "",
+
+      "imagen": "",
+
+      "modelo": "",
+
+      "audio": "",
+       "mostrarHotspot": false
+    },
+    {
+      "titulo": "Piramide Con Rampa",
+      "subtitulo": "Rampa 1",
+      "descripcion": "Las pirámides con rampa son una de las estructuras más características del santuario de Pachacámac. Estas construcciones pertenecen principalmente a la cultura Ychsma y se utilizaban como centros administrativos y ceremoniales. Su diseño incluye una rampa central que conecta la base con la parte superior, lo que facilitaba el acceso a los espacios principales.",
+
+      "imagen": "PiramideRampa/p1.jpg",
+
+      "modelo": "",
+
+      "audio": "",
+       "mostrarHotspot": true,
+
+       "hotspot": {
+        "x": 0,
+        "y": -20,
+        "z": -120
+    }
+    }
+  ],
+  "zona3": [
+    {
+      "titulo": "Andenes",
+      "subtitulo": "Sector Agrícola",
+      "descripcion": "Descripción de la zona 2.",
+
+      "imagen": "",
+
+      "modelo": "",
+
+      "audio": "",
+      "mostrarHotspot": true
+    }
+  ],
+  "zona4": [
+    {
+      "titulo": "Andenes",
+      "subtitulo": "Sector Agrícola",
+      "descripcion": "Descripción de la zona 2.",
+
+      "imagen": "",
+
+      "modelo": "",
+
+      "audio": ""
+    }
+  ],
+  "zona5": [
+    {
+      "titulo": "Andenes",
+      "subtitulo": "Sector Agrícola",
+      "descripcion": "Descripción de la zona 2.",
+
+      "imagen": "",
+
+      "modelo": "",
+
+      "audio": ""
+    }
+  ],
+  "zona6": [
+    {
+      "titulo": "Templo del Sol",
+      "subtitulo": "Monumento",
+      "descripcion": "Descripción de la zona 2.",
+
+      "imagen": "",
+
+      "modelo": "",
+
+      "audio": ""
+    }
+  ]
+}

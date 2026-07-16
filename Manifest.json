@@ -3,32 +3,76 @@
   "zonas": [
     {
       "id": "zona1",
-      "nombre": "Zona 1",
-      "ruta": "Zona-1/",
+      "nombre": "Acllawasi",
+      "ruta": "Acllawasi/",
       "imagenes": [
-        "Zona1-1-Pachacamac.jpg",
-        "Zona1-2-Pachacamac.jpg",
-        "Zona1-3-Pachacamac.jpg",
-        "Zona1-4-Pachacamac.jpg",
-        "Zona1-5-Pachacamac.jpg"
+        "Acllawasi-1.jpg",
+        "Acllawasi-2.jpg",
+        "Acllawasi-3.jpg",
+        "Acllawasi-4.jpg",
+        "Acllawasi-5.jpg",
+        "Acllawasi-6.jpg",
+        "Acllawasi-7.jpg",
+        "Acllawasi-8.jpg",
+        "Acllawasi-9.jpg"
+        
       ]
     },
     {
       "id": "zona2",
-      "nombre": "Zona 2",
-      "ruta": "Zona-2/",
+      "nombre": "PiramideRampa",
+      "ruta": "PiramideRampa/",
       "imagenes": [
-        "Zona2-1-Pachacamac.jpg",
-        "Zona2-2-Pachacamac.jpg",
-        "Zona2-3-Pachacamac.jpg",
-        "Zona2-4-Pachacamac.jpg",
-        "Zona2-5-Pachacamac.jpg"
+        "Rampa-1.jpg",
+        "Rampa-2.jpg",
+        "Rampa-3.jpg",
+        "Rampa-4.jpg",
+        "Rampa-5.jpg"
+     
       ]
     },
     {
       "id": "zona3",
       "nombre": "Zona 3",
       "ruta": "Zona-3/",
+      "imagenes": [
+        "Zona3-1-Pachacamac.jpg",
+        "Zona3-2-Pachacamac.jpg",
+        "Zona3-3-Pachacamac.jpg",
+        "Zona3-4-Pachacamac.jpg",
+        "Zona3-5-Pachacamac.jpg",
+        "Zona3-6-Pachacamac.jpg"
+      ]
+    },
+    {
+      "id": "zona4",
+      "nombre": "Zona 3",
+      "ruta": "Zona-3/",
+      "imagenes": [
+        "Zona3-1-Pachacamac.jpg",
+        "Zona3-2-Pachacamac.jpg",
+        "Zona3-3-Pachacamac.jpg",
+        "Zona3-4-Pachacamac.jpg",
+        "Zona3-5-Pachacamac.jpg",
+        "Zona3-6-Pachacamac.jpg"
+      ]
+    },
+    {
+      "id": "zona5",
+      "nombre": "TemploPintado",
+      "ruta": "TemploPintado/",
+      "imagenes": [
+        "TemploPintado-1.jpg",
+        "TemploPintado-2.jpg",
+        "TemploPintado-3.jpg",
+        "TemploPintado-4s.jpg"
+        
+      ]
+    },
+    {
+      "id": "zona6",
+      "nombre": "TemploSol",
+      "ruta": "TemploSol/",
       "imagenes": [
         "Zona3-1-Pachacamac.jpg",
         "Zona3-2-Pachacamac.jpg",

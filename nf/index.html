@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tour 360 - Pachacamac</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+    }
+
+    #viewerWrap {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: black;
+    }
+
+    #panorama {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* PANEL FLOTANTE */
+    #overlayPanel {
+      position: absolute;
+      top: 14px;
+      left: 50px;
+      z-index: 30;
+      width: 320px;
+      max-height: calc(100vh - 28px);
+      background: rgba(31, 147, 151, 0.82);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    #panelHeader {
+      padding: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #projectTitle {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #projectSubtitle {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    #togglePanelBtn {
+      border: none;
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #zoneList {
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 40vh;
+    }
+
+    .zone-button {
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .zone-button:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .zone-button.active {
+      background: #0d6efd;
+    }
+
+    #scenePanel {
+      padding: 10px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    #sceneTitle {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    #sceneInfo {
+      font-size: 12px;
+      margin-bottom: 10px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .ctrl-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 8px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      cursor: pointer;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* HOTSPOTS */
+    .custom-hotspot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #0d6efd;
+      border: 2px solid #fff;
+      cursor: pointer;
+    }
+
+    .custom-hotspot::after {
+      content: "➜";
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* OCULTAR ELEMENTOS PANNELLUM */
+    .pnlm-title-box,
+    .pnlm-load-box,
+    .pnlm-loading {
+      display: none !important;
+    }
+
+    /* COLAPSADO */
+    #overlayPanel.collapsed {
+      width: auto;
+      background:rgba(31, 147, 151, 0.82);
+      backdrop-filter: blur(8px);
+      border: none;
+      box-shadow: none;
+    }
+
+    #overlayPanel.collapsed #zoneList,
+    #overlayPanel.collapsed #scenePanel,
+    #overlayPanel.collapsed #projectSubtitle {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      #overlayPanel {
+        width: calc(100% - 28px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="viewerWrap">
+    <div id="panorama"></div>
+
+    <!-- PANEL FLOTANTE -->
+    <div id="overlayPanel">
+      <div id="panelHeader">
+        <div>
+          <h1 id="projectTitle">Cargando...</h1>
+          <p id="projectSubtitle">Tour virtual 360</p>
+        </div>
+        <button id="togglePanelBtn">☰</button>
+      </div>
+
+      <div id="zoneList"></div>
+
+      <div id="scenePanel">
+        <p id="sceneTitle">Sin escena</p>
+        <p id="sceneInfo">Selecciona una zona</p>
+
+        <button class="ctrl-btn" id="prevBtn">Anteriror</button>
+        <button class="ctrl-btn" id="nextBtn">Siguente</button>
+        <button class="ctrl-btn" id="fullscreenBtn">⛶ Pantalla Completa</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
