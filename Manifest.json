@@ -72,12 +72,11 @@
       "nombre": "TemploSol",
       "ruta": "TemploSol/",
       "imagenes": [
-        "Zona3-1-Pachacamac.jpg",
-        "Zona3-2-Pachacamac.jpg",
-        "Zona3-3-Pachacamac.jpg",
-        "Zona3-4-Pachacamac.jpg",
-        "Zona3-5-Pachacamac.jpg",
-        "Zona3-6-Pachacamac.jpg"
+        "Sol-1.jpg",
+        "Sol-2.jpg",
+        "Sol-3.jpg",
+        "Sol-4.jpg",
+        "Sol-5.jpg"
       ]
     }
   ]
