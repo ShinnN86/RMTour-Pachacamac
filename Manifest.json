@@ -1,13 +1,12 @@
 {
-  "nombre": "Saqsaywaman",
+  "nombre": "PACHACAMAC",
   "zonas": [
     {
       "id": "zona1",
-      "nombre": "Saqsaywaman",
+      "nombre": "Acllawasi",
       "ruta": "Acllawasi/",
       "imagenes": [
         "Acllawasi-1.jpg",
-        "Saqsaywaman-1.jpg",
         "Acllawasi-2.jpg",
         "Acllawasi-3.jpg",
         "Acllawasi-4.jpg",
@@ -34,28 +33,26 @@
     },
     {
       "id": "zona3",
-      "nombre": "Zona 3",
-      "ruta": "Zona-3/",
+      "nombre": "PlazaPeregrinos",
+      "ruta": "PlazaPeregrinos/",
       "imagenes": [
-        "Zona3-1-Pachacamac.jpg",
-        "Zona3-2-Pachacamac.jpg",
-        "Zona3-3-Pachacamac.jpg",
-        "Zona3-4-Pachacamac.jpg",
-        "Zona3-5-Pachacamac.jpg",
-        "Zona3-6-Pachacamac.jpg"
+        "Plaza-1.jpg",
+        "Plaza-2.jpg",
+        "Plaza-3.jpg",
+        "Plaza-4.jpg",
+        "Plaza-5.jpg"
+       
       ]
     },
     {
       "id": "zona4",
-      "nombre": "Zona 3",
-      "ruta": "Zona-3/",
+      "nombre": "Cementerio",
+      "ruta": "Cementerio/",
       "imagenes": [
-        "Zona3-1-Pachacamac.jpg",
-        "Zona3-2-Pachacamac.jpg",
-        "Zona3-3-Pachacamac.jpg",
-        "Zona3-4-Pachacamac.jpg",
-        "Zona3-5-Pachacamac.jpg",
-        "Zona3-6-Pachacamac.jpg"
+        "Cementerio-1.jpg",
+        "Cementerio-2.jpg",
+        "Cementerio-3.jpg"
+        
       ]
     },
     {
@@ -66,7 +63,7 @@
         "TemploPintado-1.jpg",
         "TemploPintado-2.jpg",
         "TemploPintado-3.jpg",
-        "TemploPintado-4s.jpg"
+        "TemploPintado-4.jpg"
         
       ]
     },
