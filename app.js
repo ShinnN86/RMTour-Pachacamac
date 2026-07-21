@@ -2,11 +2,12 @@ import * as THREE from "three";
 import { VRButton } from "three/addons/webxr/VRButton.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-
+let vozLectura = null; // Audio
 let manifest = null;
 let zonaActual = null;
 let infoEscenas = {};
 let escenaActualIndex = 0;
+let zonaActualIndex = 0;
 
 let scene, camera, renderer, sphere, controls;
 let raycaster, pointer;
@@ -379,16 +380,29 @@ function onWindowResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function cargarZona(zonaId) {
-  if (!manifest?.zonas) return;
-  zonaActual = manifest.zonas.find((z) => z.id === zonaId);
-  if (!zonaActual) return;
-  escenaActualIndex = 0;
-  // marcarLugarActivo(zonaId);
-  actualizarMiniMapa();
-  cargarEscena(0);
-}
+function cargarZona(zonaId, escena = 0) {
 
+  if (!manifest?.zonas) return;
+
+  const nuevoIndice = manifest.zonas.findIndex(
+    z => z.id === zonaId
+  );
+
+  if (nuevoIndice === -1) return;
+
+  zonaActualIndex = nuevoIndice;
+
+  zonaActual = manifest.zonas[zonaActualIndex];
+
+  escenaActualIndex = escena;
+
+  actualizarMiniMapa();
+
+  cargarEscena(escena);
+
+  actualizarHotspotInfo();
+
+}
 /*function marcarLugarActivo(zonaId) {
   document.querySelectorAll(".lugar-item").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.zona === zonaId);
@@ -396,31 +410,42 @@ function cargarZona(zonaId) {
 }*/
 
 function cargarEscena(index) {
+
   if (!zonaActual) return;
   if (index < 0 || index >= zonaActual.imagenes.length) return;
+
+
+  // actualizar inmediatamente
+  escenaActualIndex = index;
+
+
   const ruta = `${zonaActual.ruta}${zonaActual.imagenes[index]}`;
+
   console.log("Cargando:", ruta);
+
+
   const loader = new THREE.TextureLoader();
+
   loader.load(
     ruta,
     (texture) => {
+
       texture.colorSpace = THREE.SRGBColorSpace;
+
       sphere.material.map = texture;
       sphere.material.needsUpdate = true;
 
-      escenaActualIndex = index;
+
       actualizarPanelInfo();
+
+      actualizarHotspotInfo();
+
+      detenerLectura();
       cerrarInfoEscena();
       actualizarPosicionHotspot();
-
       gazeStartTime = null;
       infoAbiertaPorApuntado = false;
-    },
-    undefined,
-    (error) => {
-      console.error("Error cargando textura:", ruta, error);
-      sceneTitleEl.textContent = "Error de carga";
-      sceneInfoEl.textContent = `No se pudo cargar ${ruta}`;
+
     }
   );
 }
@@ -429,7 +454,7 @@ function actualizarPosicionHotspot() {
   if (!infoHotspot || !zonaActual) return;
 
   if (zonaActual.id === "zona1") {
-    infoHotspot.position.set(0, -20, -120);
+    infoHotspot.position.set(48, -12, -170);
   } else if (zonaActual.id === "zona2") {
     infoHotspot.position.set(40, -10, -110);
   } else if (zonaActual.id === "zona3") {
@@ -447,14 +472,46 @@ function actualizarPanelInfo() {
   if (!zonaActual) return;
 
   const archivo = zonaActual.imagenes[escenaActualIndex];
+
   sceneTitleEl.textContent =
     `${zonaActual.nombre} - Escena ${escenaActualIndex + 1}`;
-  sceneInfoEl.textContent = `Archivo: ${archivo}`;
 
-  prevBtn.disabled = escenaActualIndex === 0;
-  nextBtn.disabled = escenaActualIndex === zonaActual.imagenes.length - 1;
+  sceneInfoEl.textContent =
+    `Archivo: ${archivo}`;
+
+
+  // Desactivar anterior solo si es la primera escena
+  prevBtn.disabled =
+    escenaActualIndex === 0
+    && zonaActualIndex === 0;
+
+
+  // IMPORTANTE:
+  // nunca bloquear siguiente porque puede cambiar de zona
+  nextBtn.disabled = false;
+
 }
 
+
+function actualizarHotspotInfo() {
+
+  if (!infoHotspot || !zonaActual) return;
+
+
+  const data = infoEscenas?.[zonaActual.id]?.[escenaActualIndex];
+
+
+  if (data && data.mostrarHotspot) {
+
+    infoHotspot.visible = true;
+
+  } else {
+
+    infoHotspot.visible = false;
+
+  }
+
+}
 function abrirInfoEscena() {
 
   if (!zonaActual || !infoModalOverlay) return;
@@ -499,12 +556,18 @@ function abrirInfoEscena() {
 }
 
 function cerrarInfoEscena() {
+
   if (!infoModalOverlay) return;
 
+  detenerLectura();
+
   infoModalOverlay.classList.add("hidden");
+
   gazeStartTime = null;
   infoAbiertaPorApuntado = false;
+
   centerPointer?.classList.remove("active");
+
 }
 
 function manejarOrientacion(event) {
@@ -563,15 +626,79 @@ function desactivarGiroscopio() {
 }
 
 prevBtn?.addEventListener("click", () => {
+
+  if (!zonaActual) return;
+  console.log("ANTES PREV");
+  console.log("Zona:", zonaActual.id);
+  console.log("Indice zona:", zonaActualIndex);
+  console.log("Escena:", escenaActualIndex);
+  console.log("Total escenas:", zonaActual.imagenes.length);
+
   if (escenaActualIndex > 0) {
+
+    console.log("IR A ESCENA ANTERIOR");
+
     cargarEscena(escenaActualIndex - 1);
+
+    return;
   }
+
+  console.log("PRIMERA ESCENA - CAMBIO DE ZONA HACIA ATRÁS");
+  if (zonaActualIndex > 0) {
+
+    const zonaAnterior =
+      manifest.zonas[zonaActualIndex - 1];
+    console.log(
+      "Nueva zona:",
+      zonaAnterior.id
+    );
+    console.log(
+      "Última escena de zona anterior:",
+      zonaAnterior.imagenes.length - 1
+    );
+    cargarZona(
+      zonaAnterior.id,
+      zonaAnterior.imagenes.length - 1
+    );
+  } else {
+
+    console.log("YA ESTÁS EN LA PRIMERA ZONA");
+  }
+
 });
 
 nextBtn?.addEventListener("click", () => {
-  if (zonaActual && escenaActualIndex < zonaActual.imagenes.length - 1) {
+
+  if (!zonaActual) return;
+  console.log("ANTES");
+  console.log("Zona:", zonaActual.id);
+  console.log("Indice zona:", zonaActualIndex);
+  console.log("Escena:", escenaActualIndex);
+  console.log("Total:", zonaActual.imagenes.length);
+
+  //más
+  if (escenaActualIndex < zonaActual.imagenes.length - 1) {
+
     cargarEscena(escenaActualIndex + 1);
+
+    return;
   }
+
+  console.log("CAMBIO DE ZONA");
+  if (zonaActualIndex < manifest.zonas.length - 1) {
+    const nuevaZona =
+      manifest.zonas[zonaActualIndex + 1];
+    console.log(
+      "Nueva zona:",
+      nuevaZona.id
+    );
+    cargarZona(nuevaZona.id, 0);
+  } else {
+
+    console.log("FIN DEL RECORRIDO");
+
+  }
+
 });
 
 fullscreenBtn?.addEventListener("click", async () => {
@@ -696,6 +823,39 @@ viewModelBtn?.addEventListener("click", () => {
   window.open(url, "_blank");
 
 });
+
+playAudioBtn?.addEventListener("click", () => {
+
+  reproducirDescripcion();
+
+});
+
+
+
+function reproducirDescripcion() {
+
+  const texto = infoCardDescription.textContent;
+
+  if (!texto) return;
+
+  // detener una lectura anterior
+  window.speechSynthesis.cancel();
+
+  vozLectura = new SpeechSynthesisUtterance(texto);
+
+  vozLectura.lang = "es-ES";
+  vozLectura.rate = 1;
+  vozLectura.pitch = 1;
+  vozLectura.volume = 1;
+
+  window.speechSynthesis.speak(vozLectura);
+}
+
+function detenerLectura() {
+
+  window.speechSynthesis.cancel();
+
+}
 
 
 init();
