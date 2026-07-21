@@ -7,7 +7,7 @@
 
       "imagen": "Aclla.jpg",
 
-      "modeloUrl": "https://shinnn86.github.io/Rampa/",
+      "modeloUrl": "",
 
       "audio": "audio/acllawasi.mp3",
         "mostrarHotspot": true
@@ -20,7 +20,7 @@
 
       "imagen": "imagenes/acllawasi2.jpg",
 
-      "modeloUrl": "https://shinnn86.github.io/Rampa/",
+      "modeloUrl": "",
 
       "audio": "",
         "mostrarHotspot": false
@@ -36,7 +36,7 @@
       "modelo": "",
 
       "audio": "audio/acllawasi.mp3",
-        "mostrarHotspot": true
+        "mostrarHotspot": false
     }
   ],
 
@@ -45,11 +45,8 @@
       "titulo": "Piramide Con Rampa",
       "subtitulo": "Rampa 1",
       "descripcion": "",
-
       "imagen": "",
-
       "modelo": "",
-
       "audio": "",
        "mostrarHotspot": false
     },
@@ -57,71 +54,135 @@
       "titulo": "Piramide Con Rampa",
       "subtitulo": "Rampa 1",
       "descripcion": "",
-
       "imagen": "",
-
       "modelo": "",
-
       "audio": "",
-       "mostrarHotspot": false
+      "mostrarHotspot": false
     },
     {
       "titulo": "Piramide Con Rampa",
       "subtitulo": "Rampa 1",
       "descripcion": "Las pirámides con rampa son una de las estructuras más características del santuario de Pachacámac. Estas construcciones pertenecen principalmente a la cultura Ychsma y se utilizaban como centros administrativos y ceremoniales. Su diseño incluye una rampa central que conecta la base con la parte superior, lo que facilitaba el acceso a los espacios principales.",
-
       "imagen": "PiramideRampa/p1.jpg",
+      "modeloUrl": "https://shinnn86.github.io/Rampa/",
+      "audio": "audio/Rampa.mp3",
+      "mostrarHotspot": true
 
-      "modelo": "",
-
-      "audio": "",
-       "mostrarHotspot": true,
-
-       "hotspot": {
-        "x": 0,
-        "y": -20,
-        "z": -120
-    }
+      
     }
   ],
   "zona3": [
     {
-      "titulo": "Andenes",
-      "subtitulo": "Sector Agrícola",
-      "descripcion": "Descripción de la zona 2.",
-
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
       "imagen": "",
-
       "modelo": "",
-
       "audio": "",
-      "mostrarHotspot": true
+      "mostrarHotspot": false
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false
     }
   ],
   "zona4": [
     {
-      "titulo": "Andenes",
-      "subtitulo": "Sector Agrícola",
-      "descripcion": "Descripción de la zona 2.",
-
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
       "imagen": "",
-
       "modelo": "",
-
-      "audio": ""
+      "audio": "",
+      "mostrarHotspot": false
+    },
+    {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false
+    },
+    {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false
     }
   ],
   "zona5": [
     {
       "titulo": "Andenes",
-      "subtitulo": "Sector Agrícola",
-      "descripcion": "Descripción de la zona 2.",
-
+      "subtitulo": "",
+      "descripcion": "",
       "imagen": "",
-
       "modelo": "",
-
-      "audio": ""
+      "audio": "",
+      "mostrarHotspot": false
+    },
+     {
+      "titulo": "Andenes",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false
     }
   ],
   "zona6": [
