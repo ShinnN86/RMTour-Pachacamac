@@ -456,15 +456,15 @@ function actualizarPosicionHotspot() {
   if (zonaActual.id === "zona1") {
     infoHotspot.position.set(48, -12, -170);
   } else if (zonaActual.id === "zona2") {
-    infoHotspot.position.set(40, -10, -110);
+    infoHotspot.position.set(0, -5, -130);
   } else if (zonaActual.id === "zona3") {
-    infoHotspot.position.set(-45, -5, -115);
+    infoHotspot.position.set(15, -5, 125);
   } else if (zonaActual.id === "zona4") {
     infoHotspot.position.set(10, -8, -110);
   } else if (zonaActual.id === "zona5") {
     infoHotspot.position.set(-18, -12, -112);
   } else {
-    infoHotspot.position.set(0, -20, -120);
+    infoHotspot.position.set(-160, 20, -120);
   }
 }
 
