@@ -456,7 +456,7 @@ function actualizarPosicionHotspot() {
   if (zonaActual.id === "zona1") {
     infoHotspot.position.set(48, -12, -170);
   } else if (zonaActual.id === "zona2") {
-    infoHotspot.position.set(0, -5, -130);
+    infoHotspot.position.set(0, -5, 130);
   } else if (zonaActual.id === "zona3") {
     infoHotspot.position.set(15, -5, 125);
   } else if (zonaActual.id === "zona4") {
