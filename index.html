@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tour 360 - Pachacamac</title>
 
-  <style>
+ <style>
     * {
       box-sizing: border-box;
     }
@@ -559,179 +559,7 @@
       }
     }
 
-    @media (max-width: 768px) {
-
-
-      #overlayPanel {
-        width: 100%;
-        left: 0;
-        top: auto;
-        bottom: 0;
-        max-height: 65vh;
-        border-radius: 20px 20px 0 0;
-      }
-
-      #overlayPanel.collapsed {
-        transform: translateY(100%);
-        opacity: 0;
-      }
-
-      #menuContent {
-        max-height: 50vh;
-      }
-
-
-      #panelHeader {
-        padding: 12px;
-      }
-
-      #projectTitle {
-        font-size: 16px;
-      }
-
-      .ctrl-btn {
-        font-size: 14px;
-        padding: 12px;
-      }
-
-
-      .controls-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-      }
-
-
-      #miniMap {
-        width: 90%;
-        right: 5%;
-        bottom: 10px;
-        border-radius: 14px;
-      }
-
-
-      #floatingMenuBtn {
-        width: 56px;
-        height: 56px;
-        font-size: 20px;
-        top: 15px;
-        left: 12px;
-      }
-
-
-      .pointer-ring {
-        width: 26px;
-        height: 26px;
-      }
-
-      .pointer-dot {
-        width: 6px;
-        height: 6px;
-      }
-    }
-
-    #toggleMapBtn {
-      position: fixed;
-      bottom: 320px;
-      right: 15px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      z-index: 1000;
-      
-    }
-
-    #miniMap.hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(20px);
-    }
-
-    #miniMap {
-      transition: all 0.3s ease;
-    }
-
-
-
-    @media (max-width: 480px) {
-
-      #projectTitle {
-        font-size: 14px;
-      }
-
-      #sceneTitle {
-        font-size: 13px;
-      }
-
-      #sceneInfo {
-        font-size: 12px;
-      }
-
-      .ctrl-btn {
-        font-size: 12px;
-        padding: 10px;
-      }
-
-      .lugar-text {
-        font-size: 13px;
-      }
-
-    }
-
-    @media (min-width: 769px) {
-      #toggleMapBtn {
-        display: none;
-      }
-    }
-
-
-    @media (max-width: 768px) {
-
-
-      #miniMap.hidden {
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(20px);
-      }
-
-      #miniMap {
-        transition: all 0.3s ease;
-      }
-    }
-
-    @media (max-width: 768px) {
-
-      #overlayPanel {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: auto;
-        max-height: 55vh;
-       
-
-        border-radius: 0 0 20px 20px;
-        transform: translateY(0);
-      }
-
-      /* cuando se oculta */
-      #overlayPanel.collapsed {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-
-      #menuContent {
-        max-height: 50vh;
-        overflow-y: auto;
-      }
-    }
-
-    
-
-    /*=============================
-        MODAL
-=============================*/
+   
 
 #infoModalOverlay{
     position:fixed;
@@ -1024,52 +852,679 @@
     }
 }
 
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
 
-/*=============================
-        RESPONSIVE
-=============================*/
+@media (max-width: 1024px) {
 
-@media(max-width:600px){
-
-    .info-card{
-
-        width:96%;
-        max-height:92vh;
+    #overlayPanel {
+        width: 300px;
     }
 
-    .info-image{
-
-        height:190px;
-    }
-
-    .info-header h2{
-
-        font-size:23px;
-    }
-
-    .info-header h4{
-
-        font-size:14px;
-    }
-
-    .info-description{
-
-        font-size:14px;
-    }
-
-    .info-actions{
-
-        flex-direction:column;
+    #miniMap {
+        width: 270px;
     }
 
 }
 
 
+/* =========================================================
+   RESPONSIVE - TELEFONO
+========================================================= */
 
+@media (max-width: 768px) {
+
+    /* =========================
+       VISOR
+    ========================= */
+
+    #viewerWrap {
+        width: 100%;
+        height: 100dvh;
+        min-height: 100dvh;
+    }
+
+    #panorama {
+        width: 100%;
+        height: 100dvh;
+    }
+
+
+    /* =========================
+       PANEL SUPERIOR
+    ========================= */
+
+    #overlayPanel {
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+        right: 0;
+
+        width: 100%;
+        height: auto;
+
+        max-height: 48dvh;
+
+        border-radius: 0 0 20px 20px;
+
+        background: rgba(18, 30, 34, 0.88);
+
+        z-index: 20;
+
+        transform: translateY(0);
+
+        opacity: 1;
+
+        overflow: hidden;
+
+    }
+
+
+    /* Panel oculto */
+
+    #overlayPanel.collapsed {
+
+        transform: translateY(-105%);
+
+        opacity: 0;
+
+        pointer-events: none;
+
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    #panelHeader {
+
+        padding: 10px 14px 8px;
+
+        min-height: 58px;
+
+    }
+
+    #projectTitle {
+
+        font-size: 16px;
+
+        line-height: 1.1;
+
+    }
+
+    #projectSubtitle {
+
+        font-size: 11px;
+
+        margin-top: 3px;
+
+    }
+
+
+    .icon-btn {
+
+        width: 38px;
+        height: 38px;
+
+        border-radius: 11px;
+
+    }
+
+
+    /* =========================
+       CONTENIDO DEL PANEL
+    ========================= */
+
+    #menuContent {
+
+        padding: 0 14px 12px;
+
+        max-height: 40dvh;
+
+        overflow-y: auto;
+
+        -webkit-overflow-scrolling: touch;
+
+    }
+
+
+    /* =========================
+       SECCIONES
+    ========================= */
+
+    .menu-section {
+
+        padding: 8px 0;
+
+    }
+
+    .section-label {
+
+        margin-bottom: 7px;
+
+        font-size: 10px;
+
+        letter-spacing: 0.8px;
+
+    }
+
+
+    /* =========================
+       ESCENA
+    ========================= */
+
+    #sceneTitle {
+
+        font-size: 14px;
+
+        margin-bottom: 3px;
+
+    }
+
+    #sceneInfo {
+
+        font-size: 11px;
+
+        margin-bottom: 8px;
+
+    }
+
+
+    /* =========================
+       BOTONES
+    ========================= */
+
+    .controls-grid {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 6px;
+
+    }
+
+    .ctrl-btn {
+
+        min-height: 34px;
+
+        padding: 7px 8px;
+
+        border-radius: 10px;
+
+        font-size: 12px;
+
+    }
+
+
+    /* =========================
+       LUGARES
+    ========================= */
+
+    .lugares-wrapper {
+
+        padding-top: 8px;
+
+    }
+
+    .menu-dropdown-btn {
+
+        padding: 5px 0 7px;
+
+    }
+
+    .menu-dropdown-left {
+
+        font-size: 14px;
+
+        gap: 8px;
+
+    }
+
+    .menu-badge {
+
+        width: 28px;
+        height: 28px;
+
+    }
+
+
+    .lugares-list.open {
+
+        max-height: 180px;
+
+        overflow-y: auto;
+
+    }
+
+
+    .lugar-item {
+
+        padding: 5px 3px;
+
+        gap: 9px;
+
+    }
+
+    .lugar-icon {
+
+        width: 34px;
+        height: 34px;
+
+    }
+
+    .lugar-text {
+
+        font-size: 12px;
+
+    }
+
+
+    /* =========================
+       MAPA
+    ========================= */
+
+    #miniMap {
+
+        position: fixed;
+
+        left: 4%;
+
+        right: 4%;
+
+        bottom: 10px;
+
+        width: 92%;
+
+        height: auto;
+
+        max-height: 28dvh;
+
+        border-radius: 15px;
+
+        z-index: 25;
+
+    }
+
+
+    .mini-map-header {
+
+        height: 38px;
+
+        padding: 8px 12px;
+
+        font-size: 12px;
+
+    }
+
+
+    #miniMapCanvas {
+
+        width: 100%;
+
+        aspect-ratio: 16 / 9;
+
+    }
+
+
+    #miniMapImage {
+
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+
+    }
+
+
+    /* =========================
+       BOTON MOSTRAR / OCULTAR MAPA
+    ========================= */
+
+    #toggleMapBtn {
+
+        position: fixed;
+
+        right: 14px;
+
+        bottom: calc(28dvh + 22px);
+
+        width: 46px;
+
+        height: 46px;
+
+        border-radius: 50%;
+
+        background: rgba(0, 0, 0, 0.75);
+
+        color: white;
+
+        z-index: 1000;
+
+        border: 1px solid rgba(255,255,255,.15);
+
+        box-shadow: 0 5px 18px rgba(0,0,0,.35);
+
+    }
+
+
+    /* =========================
+       MAPA OCULTO
+    ========================= */
+
+    #miniMap.hidden {
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transform: translateY(25px);
+
+    }
+
+
+    /* =========================
+       BOTON MENU FLOTANTE
+    ========================= */
+
+    #floatingMenuBtn {
+
+        position: fixed;
+
+        top: 14px;
+
+        left: 12px;
+
+        width: 46px;
+
+        height: 46px;
+
+        border-radius: 14px;
+
+        z-index: 999;
+
+        font-size: 18px;
+
+        background: rgba(0,0,0,.75);
+
+        box-shadow: 0 5px 18px rgba(0,0,0,.35);
+
+    }
+
+
+    /* =========================
+       PUNTERO CENTRAL
+    ========================= */
+
+    .pointer-ring {
+
+        width: 25px;
+        height: 25px;
+
+    }
+
+    .pointer-dot {
+
+        width: 5px;
+        height: 5px;
+
+    }
+
+
+    /* =========================
+       MODAL INFO
+    ========================= */
+
+    #infoModalOverlay {
+
+        padding: 12px;
+
+        align-items: center;
+
+    }
+
+
+    .info-card {
+
+        width: 96%;
+
+        max-width: 430px;
+
+        max-height: 88dvh;
+
+        border-radius: 16px;
+
+    }
+
+
+    .info-header {
+
+        padding: 14px 16px;
+
+    }
+
+
+    .info-header h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .info-header h4 {
+
+        font-size: 13px;
+
+        margin-top: 4px;
+
+    }
+
+
+    #closeInfoBtn {
+
+        width: 32px;
+        height: 32px;
+
+        font-size: 16px;
+
+    }
+
+
+    .info-image {
+
+        height: 170px;
+
+    }
+
+
+    .info-description {
+
+        padding: 16px;
+
+        font-size: 13px;
+
+        line-height: 1.6;
+
+        max-height: 180px;
+
+    }
+
+
+    .info-actions {
+
+        gap: 8px;
+
+        padding: 0 16px 16px;
+
+    }
+
+
+    .info-actions button {
+
+        padding: 11px;
+
+        font-size: 13px;
+
+    }
+
+
+    .info-footer {
+
+        padding: 12px 16px;
+
+        font-size: 12px;
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    #overlayPanel {
+
+        max-height: 46dvh;
+
+    }
+
+
+    #menuContent {
+
+        max-height: 38dvh;
+
+    }
+
+
+    #projectTitle {
+
+        font-size: 15px;
+
+    }
+
+
+    #sceneTitle {
+
+        font-size: 13px;
+
+    }
+
+
+    #sceneInfo {
+
+        font-size: 11px;
+
+    }
+
+
+    .ctrl-btn {
+
+        min-height: 32px;
+
+        font-size: 11px;
+
+        padding: 6px;
+
+    }
+
+
+    .lugares-list.open {
+
+        max-height: 150px;
+
+    }
+
+
+    #miniMap {
+
+        width: 92%;
+
+        left: 4%;
+
+        right: 4%;
+
+        bottom: 8px;
+
+    }
+
+
+    #toggleMapBtn {
+
+        bottom: calc(28dvh + 18px);
+
+        width: 44px;
+
+        height: 44px;
+
+    }
+
+}
+@media (max-width: 768px) {
+
+    #infoModalOverlay {
+        padding: 18px;
+        align-items: center;
+    }
+
+    .info-card {
+        width: 88%;
+        max-width: 360px;
+        max-height: 76dvh;
+        border-radius: 15px;
+    }
+
+    .info-header {
+        padding: 11px 14px;
+    }
+
+    .info-header h2 {
+        font-size: 18px;
+    }
+
+    .info-header h4 {
+        font-size: 12px;
+        margin-top: 3px;
+    }
+
+    #closeInfoBtn {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .info-image {
+        height: 135px;
+    }
+
+    .info-description {
+        padding: 13px 15px;
+        font-size: 12px;
+        line-height: 1.5;
+        max-height: 140px;
+    }
+
+    .info-actions {
+        gap: 7px;
+        padding: 0 15px 13px;
+    }
+
+    .info-actions button {
+        padding: 9px;
+        font-size: 12px;
+    }
+
+    .info-footer {
+        padding: 9px 15px;
+        font-size: 11px;
+    }
+}
 
    
   </style>
-
   <script type="importmap">
   {
     "imports": {
@@ -1114,7 +1569,7 @@
               <button class="ctrl-btn" id="nextBtn">Siguiente</button>
               <button class="ctrl-btn" id="fullscreenBtn">Pantalla</button>
               <button class="ctrl-btn" id="infoBtn">Info</button>
-              <button class="ctrl-btn" id="gyroBtn">Giroscopio</button>
+              <button class="ctrl-btn" id="gyroBtn" style="display: none;">Giroscopio</button>
             </div>
           </div>
         </div>
