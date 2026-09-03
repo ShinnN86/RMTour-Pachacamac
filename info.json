@@ -4,10 +4,22 @@
       "titulo": "Acllawasi",
       "subtitulo": "Casa de las escogidas",
       "descripcion": "Acllawasi, también conocido como Casa de las Escogidas, era un espacio destinado a mujeres seleccionadas para servir al Estado Inca. Estas mujeres elaboraban textiles finos, preparaban ofrendas y participaban en ceremonias religiosas.",
-      "imagen": "img-text/Acllawasi.JPG",
+
+      "imagen": "img-text/Acllawasi.jpg",
+
       "modeloUrl": "",
+
       "audio": "audio/acllawasi.mp3",
-      "mostrarHotspot": true
+      "mostrarHotspot": true,
+      "navegacion": {
+    "siguiente": {
+      "escena": 1,
+      "x": -102,
+      "y": -70,
+      "z": -72,
+      "rotacion": 8.50
+    }
+  }
     },
 
     {
@@ -20,7 +32,23 @@
       "modeloUrl": "",
 
       "audio": "",
-      "mostrarHotspot": false
+      "mostrarHotspot": false,
+      "navegacion": {
+        "anterior": {
+          "escena": 0,
+          "x": 186,
+          "y": -68,
+          "z": -14,
+          "rotacion": 3.25
+        },
+        "siguiente": {
+          "escena": 2,
+          "x": -90,
+          "y": -70,
+          "z": 8,
+          "rotacion": 9.6
+        }
+  }
     },
 
     {
@@ -33,7 +61,22 @@
       "modelo": "",
 
       "audio": "audio/acllawasi.mp3",
-      "mostrarHotspot": false
+      "mostrarHotspot": false,
+      "navegacion": {
+    "anterior": {
+      "escena": 1,
+      "x": 0,
+      "y": -70,
+      "z": 150
+    },
+    "siguiente": {
+      "escena": 3,
+      "x": 10,
+      "y": -70,
+      "z": -150
+    }
+  }
+       
     }
   ],
 
@@ -45,7 +88,21 @@
       "imagen": "",
       "modelo": "",
       "audio": "",
-      "mostrarHotspot": false
+      "mostrarHotspot": false,
+      "navegacion": {
+    "anterior": {
+      "escena": 0,
+      "x": 0,
+      "y": -70,
+      "z": 150
+    },
+    "siguiente": {
+      "escena": 2,
+      "x": 10,
+      "y": -70,
+      "z": -150
+    }
+  }
     },
     {
       "titulo": "Piramide Con Rampa",
@@ -100,7 +157,7 @@
       "titulo": "Plaza de los Peregrinos",
       "subtitulo": "Plaza de los Peregrinos",
       "descripcion": "La Plaza de los Peregrinos era uno de los espacios más importantes del santuario, ya que funcionaba como punto de reunión para las personas que llegaban desde distintas regiones. Este espacio abierto permitía concentrar a grandes grupos de visitantes antes de ingresar a las áreas más sagradas. En esta plaza, los peregrinos realizaban diversas actividades previas a su ingreso al santuario, como rituales de purificación, ofrendas y ayunos.",
-      "imagen": "img-text/Plazaperegrinos.JPG",
+      "imagen": "img-text/Plazaperegrinos.jpg",
       "modelo": "",
       "audio": "audio/plaza.mp3",
       "mostrarHotspot": true
@@ -138,7 +195,7 @@
       "titulo": "Cementerio Max Uhle",
       "subtitulo": "Cementerio Max Uhle",
       "descripcion": "El Cementerio Max Uhle es uno de los sectores más importantes para el estudio arqueológico de Pachacámac. Fue excavado por el arqueólogo alemán Max Uhle, quien realizó importantes investigaciones en el sitio a inicios del siglo XX. En este cementerio se han encontrado numerosos entierros que permiten conocer las prácticas funerarias de las culturas que habitaron el santuario. Los cuerpos eran enterrados junto a objetos como cerámicas, textiles y alimentos, lo que indica creencias en la vida después de la muerte. Los hallazgos en este sector han permitido identificar diferencias sociales entre los individuos enterrados.",
-      "imagen": "img-text/Cementerio.JPG",
+      "imagen": "img-text/Cementerio.jpg",
       "modelo": "",
       "audio": "audio/cementerio.mp3",
       "mostrarHotspot": true
@@ -158,7 +215,7 @@
       "titulo": "Templo Pintado",
       "subtitulo": "Templo Pintado",
       "descripcion": "El Templo Pintado es una de las estructuras más llamativas de Pachacámac debido a los restos de pintura que aún se conservan en sus muros. Este edificio fue construido principalmente durante la ocupación de la cultura Wari y destaca por su decoración con figuras geométricas y simbólicas. Las pinturas encontradas en este templo representan elementos relacionados con el mar, como peces y olas, lo que indica la importancia de este recurso en la vida de las culturas costeras. Estas representaciones también tienen un significado religioso, ya que estaban vinculadas a creencias sobre la fertilidad y la abundancia.",
-      "imagen": "img-text/TemploPintado.JPG",
+      "imagen": "img-text/TemploPintado.jpg",
       "modelo": "",
       "audio": "audio/templo.mp3",
       "mostrarHotspot": true
@@ -214,7 +271,7 @@
       "titulo": "Templo del Sol",
       "subtitulo": "Templo del Sol",
       "descripcion": "El Templo del Sol es una de las estructuras más imponentes del santuario, construido durante el periodo Inca. Este edificio fue dedicado al culto del sol, una de las principales deidades del imperio incaico. La estructura presenta una gran pirámide con rampas y plataformas, desde donde se puede observar el valle de Lurín y el océano Pacífico. Su ubicación estratégica refuerza su importancia como centro ceremonial y de control territorial. ",
-      "imagen": "img-text/TemploSol.JPG",
+      "imagen": "img-text/TemploSol.jpg",
       "modelo": "",
       "audio": "audio/templosol.mp3",
       "mostrarHotspot": true
