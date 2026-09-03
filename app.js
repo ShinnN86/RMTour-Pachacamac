@@ -218,6 +218,8 @@ function initThree() {
 }
 
 function bindLugaresMenu() {
+  lugaresList?.classList.remove("open");
+  lugaresChevron?.classList.remove("rotated");
   lugaresToggleBtn?.addEventListener("click", () => {
     lugaresList?.classList.toggle("open");
     lugaresChevron?.classList.toggle("rotated");
@@ -471,27 +473,16 @@ function actualizarPosicionHotspot() {
 function actualizarPanelInfo() {
   if (!zonaActual) return;
 
-  const archivo = zonaActual.imagenes[escenaActualIndex];
+  sceneTitleEl.textContent = zonaActual.nombre;
 
-  sceneTitleEl.textContent =
-    `${zonaActual.nombre} - Escena ${escenaActualIndex + 1}`;
+  sceneInfoEl.textContent = "";
 
-  sceneInfoEl.textContent =
-    `Archivo: ${archivo}`;
-
-
-  // Desactivar anterior solo si es la primera escena
   prevBtn.disabled =
-    escenaActualIndex === 0
-    && zonaActualIndex === 0;
+    escenaActualIndex === 0 &&
+    zonaActualIndex === 0;
 
-
-  // IMPORTANTE:
-  // nunca bloquear siguiente porque puede cambiar de zona
   nextBtn.disabled = false;
-
 }
-
 
 function actualizarHotspotInfo() {
 
