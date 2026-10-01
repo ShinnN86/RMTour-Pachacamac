@@ -15,16 +15,15 @@ let raycaster, pointer;
 
 let infoHotspot = null;
 
-// ========================================
-// BOTONES 3D DE NAVEGACIÓN
-// ========================================
+// Botones 3D
+
 
 let navigationHotspots = [];
 
 const gltfLoader = new GLTFLoader();
 
-const RUTA_AVANZAR = "modelos/avanzar.glb";
-const RUTA_RETROCEDER = "modelos/retroceder.glb";
+const RUTA_AVANZAR = "modelos/flechaB.glb";
+const RUTA_RETROCEDER = "modelos/flechaA.glb";
 
 // Giroscopio
 let gyroActivo = false;
@@ -94,9 +93,8 @@ const mapaCoords = {
   zona6: { left: "55%", top: "82%" }
 };
 
-// ========================================
-// CARGAR INFORMACIÓN
-// ========================================
+
+// Cargar info
 
 async function cargarInfo() {
   const response = await fetch("info.json");
@@ -108,9 +106,6 @@ async function cargarInfo() {
   infoEscenas = await response.json();
 }
 
-// ========================================
-// DETECTAR MÓVIL
-// ========================================
 
 function esMovil() {
   return /Android|iPhone|iPad|iPod|Mobile|Tablet/i.test(
@@ -118,9 +113,7 @@ function esMovil() {
   );
 }
 
-// ========================================
-// INICIO
-// ========================================
+
 
 async function init() {
   try {
@@ -166,11 +159,7 @@ async function init() {
     sceneInfoEl.textContent = error.message;
   }
 }
-
-// ========================================
 // THREE.JS
-// ========================================
-
 function initThree() {
 
   const container =
@@ -210,10 +199,7 @@ function initThree() {
     VRButton.createButton(renderer)
   );
 
-  // ========================================
   // ESFERA 360
-  // ========================================
-
   const geometry =
     new THREE.SphereGeometry(
       1000,
@@ -234,11 +220,7 @@ function initThree() {
   );
 
   scene.add(sphere);
-
-  // ========================================
   // CONTROLES
-  // ========================================
-
   controls = new OrbitControls(
     camera,
     renderer.domElement
@@ -252,11 +234,7 @@ function initThree() {
 
   controls.minPolarAngle = 0;
   controls.maxPolarAngle = Math.PI;
-
-  // ========================================
   // RAYCASTER
-  // ========================================
-
   raycaster = new THREE.Raycaster();
   pointer = new THREE.Vector2();
 
@@ -270,15 +248,11 @@ function initThree() {
     onSceneMouseMove
   );
 
-  // ========================================
-  // HOTSPOT DE INFORMACIÓN
-  // ========================================
+  // HOTSPOT
 
   crearHotspotInfo();
 
-  // ========================================
   // ANIMACIÓN
-  // ========================================
 
   renderer.setAnimationLoop(() => {
 
@@ -297,10 +271,7 @@ function initThree() {
 
       }
     }
-
-    // ----------------------------------------
     // HOTSPOT INFO
-    // ----------------------------------------
 
     if (infoHotspot) {
 
@@ -332,10 +303,7 @@ function initThree() {
         );
       }
     }
-
-    // ----------------------------------------
     // BOTONES 3D
-    // ----------------------------------------
 
     navigationHotspots.forEach((nav) => {
 
@@ -359,11 +327,7 @@ function initThree() {
       }
 
     });
-
-    // ----------------------------------------
     // APUNTADO AUTOMÁTICO
-    // ----------------------------------------
-
     detectarApuntadoAutomatico();
 
     renderer.render(
@@ -378,9 +342,7 @@ function initThree() {
   );
 }
 
-// ========================================
 // MENÚ LUGARES
-// ========================================
 
 function bindLugaresMenu() {
 
@@ -399,11 +361,7 @@ function bindLugaresMenu() {
     }
   );
 }
-
-// ========================================
 // MINI MAPA
-// ========================================
-
 function bindMiniMapa() {
 
   mapPoints.forEach((point) => {
@@ -422,7 +380,6 @@ function bindMiniMapa() {
     );
   });
 }
-
 function actualizarMiniMapa() {
 
   if (!gpsMarker || !zonaActual) return;
@@ -445,9 +402,7 @@ function actualizarMiniMapa() {
   });
 }
 
-// ========================================
 // HOTSPOT INFORMACIÓN
-// ========================================
 
 function crearHotspotInfo() {
 
@@ -508,7 +463,6 @@ function crearHotspotInfo() {
     );
 
   glow.name = "glow";
-
   group.add(glow);
 
   // Texto
@@ -577,9 +531,7 @@ function crearTextoSprite(texto) {
   return new THREE.Sprite(material);
 }
 
-// ========================================
 // BOTONES 3D GLB
-// ========================================
 
 function limpiarBotonesNavegacion() {
 
@@ -613,9 +565,7 @@ function limpiarBotonesNavegacion() {
   navigationHotspots = [];
 }
 
-
 // Botones 3D para desplazamietno
-
 
 function crearBotonNavegacion(direccion, posicion) { 
  
@@ -646,9 +596,9 @@ function crearBotonNavegacion(direccion, posicion) {
         0
       );
  
-      // ------------------------------------ 
+
       // DATOS 
-      // ------------------------------------ 
+    
  
       modelo.userData.esNavegacion = true; 
  
@@ -668,9 +618,9 @@ function crearBotonNavegacion(direccion, posicion) {
  
       modelo.userData.rotar = false; 
  
-      // ------------------------------------ 
+
       // SOMBRA / MATERIAL 
-      // ------------------------------------ 
+  
  
       modelo.traverse((child) => { 
  
@@ -687,9 +637,9 @@ function crearBotonNavegacion(direccion, posicion) {
         } 
       }); 
  
-      // ------------------------------------ 
+
       // GUARDAR 
-      // ------------------------------------ 
+  
  
       navigationHotspots.push( 
         modelo 
@@ -714,9 +664,9 @@ function crearBotonNavegacion(direccion, posicion) {
     } 
   ); 
 }
-// ========================================
+
 // ACTUALIZAR BOTONES SEGÚN ESCENA
-// ========================================
+
 
 function actualizarBotonesNavegacion() {
 
@@ -738,9 +688,9 @@ function actualizarBotonesNavegacion() {
 
   if (!navegacion) return;
 
-  // ----------------------------------------
+
   // AVANZAR
-  // ----------------------------------------
+
 
   if (navegacion.siguiente) {
 
@@ -767,9 +717,8 @@ function actualizarBotonesNavegacion() {
     );
   }
 
-  // ----------------------------------------
   // RETROCEDER
-  // ----------------------------------------
+
 
   if (navegacion.anterior) {
 
@@ -796,9 +745,9 @@ function actualizarBotonesNavegacion() {
   }
 }
 
-// ========================================
+
 // MOUSE
-// ========================================
+
 
 function onSceneMouseMove(event) {
 
@@ -834,9 +783,8 @@ function onSceneMouseMove(event) {
       : "default";
 }
 
-// ========================================
 // CLICK
-// ========================================
+
 
 function onSceneClick(event) {
 
@@ -859,9 +807,9 @@ function onSceneClick(event) {
     camera
   );
 
-  // ========================================
+
   // PRIMERO BOTONES 3D
-  // ========================================
+
 
   const navIntersects =
     raycaster.intersectObjects(
@@ -897,10 +845,7 @@ function onSceneClick(event) {
     }
   }
 
-  // ========================================
   // HOTSPOT INFO
-  // ========================================
-
   if (!infoHotspot) return;
 
   const infoIntersects =
@@ -915,10 +860,7 @@ function onSceneClick(event) {
   }
 }
 
-// ========================================
 // EJECUTAR NAVEGACIÓN
-// ========================================
-
 function ejecutarNavegacion(
   boton
 ) {
@@ -950,10 +892,7 @@ function ejecutarNavegacion(
   );
 }
 
-// ========================================
 // POINTER
-// ========================================
-
 function updatePointer(event) {
 
   const rect =
@@ -972,9 +911,7 @@ function updatePointer(event) {
     ) * 2 + 1;
 }
 
-// ========================================
 // APUNTADO AUTOMÁTICO
-// ========================================
 
 function detectarApuntadoAutomatico() {
 
@@ -1007,10 +944,7 @@ function detectarApuntadoAutomatico() {
     camera
   );
 
-  // ========================================
   // PRIMERO NAVEGACIÓN
-  // ========================================
-
   const navIntersects =
     raycaster.intersectObjects(
       navigationHotspots,
@@ -1070,9 +1004,7 @@ function detectarApuntadoAutomatico() {
     }
   }
 
-  // ========================================
   // INFO
-  // ========================================
 
   if (!infoHotspot) return;
 
@@ -1155,9 +1087,8 @@ function detectarApuntadoAutomatico() {
   }
 }
 
-// ========================================
 // RESIZE
-// ========================================
+
 
 function onWindowResize() {
 
@@ -1173,9 +1104,8 @@ function onWindowResize() {
   );
 }
 
-// ========================================
 // CARGAR ZONA
-// ========================================
+
 
 function cargarZona(
   zonaId,
@@ -1209,9 +1139,72 @@ function cargarZona(
   );
 }
 
-// ========================================
+// ORIENTACIÓN INICIAL DE CÁMARA
+
+function aplicarOrientacionInicial() {
+
+  if (!camera || !controls || !zonaActual) {
+    return;
+  }
+
+  const data =
+    infoEscenas?.[
+      zonaActual.id
+    ]?.[
+      escenaActualIndex
+    ];
+
+  if (!data) return;
+
+  const camaraData =
+    data.camara;
+
+  // Si la escena no tiene configuración,
+  // usamos la orientación por defecto
+  if (!camaraData) {
+
+    controls.target.set(
+      0,
+      0,
+      -1
+    );
+
+    controls.update();
+
+    return;
+  }
+
+  const yaw =
+    camaraData.yaw ?? 0;
+
+  const pitch =
+    camaraData.pitch ?? 0;
+
+  // Dirección hacia donde debe mirar
+  const direccion =
+    new THREE.Vector3(
+      Math.sin(yaw) * Math.cos(pitch),
+      Math.sin(pitch),
+      -Math.cos(yaw) * Math.cos(pitch)
+    );
+
+  controls.target.copy(
+    camera.position
+  ).add(
+    direccion
+  );
+
+  controls.update();
+
+  console.log(
+    "📷 Cámara inicial:",
+    "yaw =", yaw,
+    "pitch =", pitch
+  );
+}
+
 // CARGAR ESCENA
-// ========================================
+
 
 function cargarEscena(index) {
 
@@ -1264,6 +1257,8 @@ function cargarEscena(index) {
       detenerLectura();
 
       cerrarInfoEscena();
+      // NUEVO
+      aplicarOrientacionInicial();
 
       gazeStartTime = null;
 
@@ -1284,9 +1279,7 @@ function cargarEscena(index) {
   );
 }
 
-// ========================================
 // POSICIÓN HOTSPOT INFO
-// ========================================
 
 function actualizarPosicionHotspot() {
 
@@ -1360,9 +1353,7 @@ function actualizarPosicionHotspot() {
     infoHotspot.position.y;
 }
 
-// ========================================
 // PANEL INFO
-// ========================================
 
 function actualizarPanelInfo() {
 
@@ -1382,9 +1373,8 @@ function actualizarPanelInfo() {
     false;
 }
 
-// ========================================
 // VISIBILIDAD HOTSPOT
-// ========================================
+
 
 function actualizarHotspotInfo() {
 
@@ -1416,11 +1406,7 @@ function actualizarHotspotInfo() {
       false;
   }
 }
-
-// ========================================
 // ABRIR INFO
-// ========================================
-
 function abrirInfoEscena() {
 
   if (
@@ -1507,11 +1493,7 @@ function abrirInfoEscena() {
     "hidden"
   );
 }
-
-// ========================================
 // CERRAR INFO
-// ========================================
-
 function cerrarInfoEscena() {
 
   if (!infoModalOverlay) return;
@@ -1532,9 +1514,7 @@ function cerrarInfoEscena() {
   );
 }
 
-// ========================================
 // GIROSCOPIO
-// ========================================
 
 function manejarOrientacion(event) {
 
@@ -1573,9 +1553,7 @@ function manejarOrientacion(event) {
     );
 }
 
-// ========================================
 // ACTIVAR GIROSCOPIO
-// ========================================
 
 async function activarGiroscopio() {
 
@@ -1642,10 +1620,7 @@ async function activarGiroscopio() {
     );
   }
 }
-
-// ========================================
 // DESACTIVAR GIROSCOPIO
-// ========================================
 
 function desactivarGiroscopio() {
 
@@ -1662,9 +1637,7 @@ function desactivarGiroscopio() {
   }
 }
 
-// ========================================
 // BOTÓN PREV
-// ========================================
 
 prevBtn?.addEventListener(
   "click",
@@ -1700,9 +1673,7 @@ prevBtn?.addEventListener(
   }
 );
 
-// ========================================
 // BOTÓN NEXT
-// ========================================
 
 nextBtn?.addEventListener(
   "click",
@@ -1740,9 +1711,7 @@ nextBtn?.addEventListener(
   }
 );
 
-// ========================================
 // FULLSCREEN
-// ========================================
 
 fullscreenBtn?.addEventListener(
   "click",
@@ -1762,9 +1731,8 @@ fullscreenBtn?.addEventListener(
   }
 );
 
-// ========================================
 // PANEL
-// ========================================
+
 
 floatingBtn.style.display =
   "none";
@@ -1788,10 +1756,8 @@ togglePanelBtn?.addEventListener(
         : "none";
   }
 );
-
-// ========================================
 // BOTÓN FLOTANTE
-// ========================================
+
 
 floatingBtn?.addEventListener(
   "click",
@@ -1806,9 +1772,8 @@ floatingBtn?.addEventListener(
   }
 );
 
-// ========================================
 // INFO
-// ========================================
+
 
 infoBtn?.addEventListener(
   "click",
@@ -1820,9 +1785,7 @@ closeInfoBtn?.addEventListener(
   cerrarInfoEscena
 );
 
-// ========================================
 // GIROSCOPIO
-// ========================================
 
 gyroBtn?.addEventListener(
   "click",
@@ -1841,9 +1804,8 @@ gyroBtn?.addEventListener(
   }
 );
 
-// ========================================
-// CERRAR MODAL
-// ========================================
+
+
 
 infoModalOverlay?.addEventListener(
   "click",
@@ -1870,9 +1832,7 @@ document.addEventListener(
   }
 );
 
-// ========================================
-// MAPA GRANDE
-// ========================================
+
 
 const expandMapBtn =
   document.getElementById(
@@ -1990,9 +1950,6 @@ function cerrarMapaGrande() {
   );
 }
 
-// ========================================
-// MODELO 3D DESDE INFO
-// ========================================
 
 viewModelBtn?.addEventListener(
   "click",
@@ -2063,4 +2020,285 @@ function detenerLectura() {
   window.speechSynthesis.cancel();
 }
 
+
+
+function obtenerOrientacionCamara() {
+
+  if (!camera || !controls) return;
+
+  const direccion =
+    new THREE.Vector3();
+
+  camera.getWorldDirection(
+    direccion
+  );
+
+  const yaw =
+    Math.atan2(
+      direccion.x,
+      -direccion.z
+    );
+
+  const pitch =
+    Math.asin(
+      THREE.MathUtils.clamp(
+        direccion.y,
+        -1,
+        1
+      )
+    );
+
+  console.log("================================");
+  console.log("📷 ORIENTACIÓN DE CÁMARA");
+  console.log(
+    "Zona:",
+    zonaActual?.id
+  );
+  console.log(
+    "Escena:",
+    escenaActualIndex
+  );
+  console.log(
+    "YAW:",
+    yaw.toFixed(4)
+  );
+  console.log(
+    "PITCH:",
+    pitch.toFixed(4)
+  );
+  console.log("================================");
+
+  console.log(
+    `"camara": { "yaw": ${yaw.toFixed(4)}, "pitch": ${pitch.toFixed(4)} }`
+  );
+}
+
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+
+    if (
+      event.key.toLowerCase() === "c"
+    ) {
+
+      obtenerOrientacionCamara();
+    }
+
+  }
+);
+
+
+
+let botonEditando = null;
+
+const VELOCIDAD_MOVIMIENTO = 2;
+const VELOCIDAD_ALTURA = 2;
+const VELOCIDAD_ROTACION = 0.05;
+const VELOCIDAD_ESCALA = 0.05;
+
+
+
+function seleccionarBotonEdicion(direccion) {
+
+  const boton = navigationHotspots.find(
+    nav => nav.userData.direccion === direccion
+  );
+
+  if (!boton) {
+
+    console.warn(
+      `No se encontró el botón: ${direccion}`
+    );
+
+    return;
+  }
+
+  botonEditando = boton;
+
+  console.log(
+    `🎯 Editando botón: ${direccion}`
+  );
+
+  mostrarCoordenadasBoton();
+}
+
+
+// ----------------------------------------
+// MOSTRAR COORDENADAS
+// ----------------------------------------
+
+function mostrarCoordenadasBoton() {
+
+  if (!botonEditando) return;
+
+  console.log(
+    "================================"
+  );
+
+  console.log(
+    "BOTÓN:",
+    botonEditando.userData.direccion
+  );
+
+  console.log(
+    "X:",
+    botonEditando.position.x.toFixed(2)
+  );
+
+  console.log(
+    "Y:",
+    botonEditando.position.y.toFixed(2)
+  );
+
+  console.log(
+    "Z:",
+    botonEditando.position.z.toFixed(2)
+  );
+
+  console.log(
+    "ROTACIÓN Y:",
+    botonEditando.rotation.y.toFixed(2)
+  );
+
+  console.log(
+    "ESCALA:",
+    botonEditando.scale.x.toFixed(2)
+  );
+
+  console.log(
+    "================================"
+  );
+}
+
+
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+
+    if (!botonEditando) return;
+
+    const key =
+      event.key.toLowerCase();
+
+    switch (key) {
+
+
+
+      case "w":
+
+        botonEditando.position.z -=
+          VELOCIDAD_MOVIMIENTO;
+
+        break;
+
+      case "s":
+
+        botonEditando.position.z +=
+          VELOCIDAD_MOVIMIENTO;
+
+        break;
+
+      case "a":
+
+        botonEditando.position.x -=
+          VELOCIDAD_MOVIMIENTO;
+
+        break;
+
+      case "d":
+
+        botonEditando.position.x +=
+          VELOCIDAD_MOVIMIENTO;
+
+        break;
+
+
+
+      case "q":
+
+        botonEditando.position.y +=
+          VELOCIDAD_ALTURA;
+
+        break;
+
+      case "e":
+
+        botonEditando.position.y -=
+          VELOCIDAD_ALTURA;
+
+        break;
+
+
+      case "r":
+
+        botonEditando.rotation.y +=
+          VELOCIDAD_ROTACION;
+
+        break;
+
+      case "f":
+
+        botonEditando.scale.multiplyScalar(
+          1 + VELOCIDAD_ESCALA
+        );
+
+        break;
+
+      case "g":
+
+        botonEditando.scale.multiplyScalar(
+          1 - VELOCIDAD_ESCALA
+        );
+
+        break;
+
+
+
+      case "c":
+
+        mostrarCoordenadasBoton();
+
+        break;
+
+
+      default:
+
+        return;
+    }
+
+    event.preventDefault();
+
+    mostrarCoordenadasBoton();
+  }
+);
+
+
+
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+
+    const key =
+      event.key.toLowerCase();
+
+    // 1 = AVANZAR
+    if (key === "1") {
+
+      seleccionarBotonEdicion(
+        "siguiente"
+      );
+    }
+
+    // 2 = RETROCEDER
+    if (key === "2") {
+
+      seleccionarBotonEdicion(
+        "anterior"
+      );
+    }
+  }
+);
 init();
