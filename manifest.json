@@ -1,0 +1,83 @@
+{
+  "nombre": "PACHACAMAC",
+  "zonas": [
+    {
+      "id": "zona1",
+      "nombre": "Acllawasi",
+      "ruta": "lugares/Acllawasi/",
+      "imagenes": [
+        "Acllawasi-1.jpg",
+        "Acllawasi-2.jpg",
+        "Acllawasi-3.jpg",
+        "Acllawasi-4.jpg",
+        "Acllawasi-5.jpg",
+        "Acllawasi-6.jpg",
+        "Acllawasi-7.jpg",
+        "Acllawasi-8.jpg",
+        "Acllawasi-9.jpg"
+        
+      ]
+    },
+    {
+      "id": "zona2",
+      "nombre": "PiramideRampa",
+      "ruta": "lugares/PiramideRampa/",
+      "imagenes": [
+        "Rampa-1.jpg",
+        "Rampa-2.jpg",
+        "Rampa-3.jpg",
+        "Rampa-4.jpg",
+        "Rampa-5.jpg"
+     
+      ]
+    },
+    {
+      "id": "zona3",
+      "nombre": "PlazaPeregrinos",
+      "ruta": "lugares/PlazaPeregrinos/",
+      "imagenes": [
+        "Plaza-1.jpg",
+        "Plaza-2.jpg",
+        "Plaza-3.jpg",
+        "Plaza-4.jpg",
+        "Plaza-5.jpg"
+       
+      ]
+    },
+    {
+      "id": "zona4",
+      "nombre": "Cementerio",
+      "ruta": "lugares/Cementerio/",
+      "imagenes": [
+        "Cementerio-1.jpg",
+        "Cementerio-2.jpg",
+        "Cementerio-3.jpg"
+        
+      ]
+    },
+    {
+      "id": "zona5",
+      "nombre": "TemploPintado",
+      "ruta": "lugares/TemploPintado/",
+      "imagenes": [
+        "TemploPintado-1.jpg",
+        "TemploPintado-2.jpg",
+        "TemploPintado-3.jpg",
+        "TemploPintado-4.jpg"
+        
+      ]
+    },
+    {
+      "id": "zona6",
+      "nombre": "TemploSol",
+      "ruta": "lugares/TemploSol/",
+      "imagenes": [
+        "Sol-1.jpg",
+        "Sol-2.jpg",
+        "Sol-3.jpg",
+        "Sol-4.jpg",
+        "Sol-5.jpg"
+      ]
+    }
+  ]
+}

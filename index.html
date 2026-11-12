@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tour 360 - Pachacamac</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <div id="viewerWrap">
+
+    <div id="panorama"></div>
+
+    <div id="centerPointer">
+      <div class="pointer-ring"></div>
+      <div class="pointer-dot"></div>
+    </div>
+
+    <div id="overlayPanel">
+
+      <div id="panelHeader">
+        <div>
+          <h1 id="projectTitle">Cargando...</h1>
+          <p id="projectSubtitle">Tour VR</p>
+        </div>
+        <button id="togglePanelBtn" class="icon-btn">☰</button>
+      </div>
+
+      <div id="menuContent">
+
+        <div class="menu-section">
+          <p class="section-label">Visor</p>
+
+          <div id="scenePanel">
+            <p id="sceneTitle">Sin escena</p>
+            <p id="sceneInfo">Selecciona una zona</p>
+
+            <div class="controls-grid">
+              <button class="ctrl-btn" id="prevBtn">Anterior</button>
+              <button class="ctrl-btn" id="nextBtn">Siguiente</button>
+              <button class="ctrl-btn" id="fullscreenBtn">Pantalla</button>
+              <button class="ctrl-btn" id="infoBtn">Info</button>
+              <button class="ctrl-btn" id="gyroBtn" style="display: none;">Giroscopio</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section lugares-wrapper">
+          <p class="section-label">Exploración</p>
+
+          <button id="lugaresToggleBtn" class="menu-dropdown-btn">
+            <div class="menu-dropdown-left">
+              <div class="menu-badge">📍</div>
+              <span>Lugares</span>
+            </div>
+            <div id="lugaresChevron" class="chevron">▼</div>
+          </button>
+
+          <div id="lugaresList" class="lugares-list">
+            <a class="lugar-item" href="https://shinnn86.github.io/RMTour-Tipon/">
+              <div class="lugar-icon">
+                <img src="assets/iconos/Tipon.jpg" alt="Tipón">
+              </div>
+              <div class="lugar-text">Tipón</div>
+            </a>
+            <a class="lugar-item" href="">
+              <div class="lugar-icon">
+                <img src="assets/iconos/Pachacamac.jpg" alt="Pachacamac">
+              </div>
+              <div class="lugar-text">Pachacamac</div>
+            </a>
+            <a class="lugar-item" href="https://shinnn86.github.io/RMTour-Raqchi/">
+              <div class="lugar-icon">
+                <img src="assets/iconos/Raqchi.jpg" alt="Raqchi">
+              </div>
+              <div class="lugar-text">Raqchi</div>
+            </a>
+            <a class="lugar-item" href="https://shinnn86.github.io/RMTour-Caral-360/">
+              <div class="lugar-icon">
+                <img src="assets/iconos/Caral.jpg" alt="Caral">
+              </div>
+              <div class="lugar-text">Caral</div>
+            </a>
+            <a class="lugar-item" href="https://shinnn86.github.io/RMTour-Saqsaywaman/">
+              <div class="lugar-icon">
+                <img src="assets/iconos/Saqsaywaman.jpg" alt="Sacsayhuamán">
+              </div>
+              <div class="lugar-text">Sacsayhuamán</div>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <button id="floatingMenuBtn" class="icon-btn">☰</button>
+    <button id="toggleMapBtn" class="icon-btn">🗺️</button>
+    <div id="miniMap">
+      <div class="mini-map-header">
+        <span>Mapa</span>
+        <button id="expandMapBtn">⛶</button>
+      </div>
+
+      <div id="miniMapCanvas">
+        <img id="miniMapImage" src="assets/iconos/Pachacamac.png" alt="Mapa de navegación">
+
+        <button class="map-point" data-zona="zona1" style="left: 32%; top: 22%;" title="Panorámica"></button>
+        <button class="map-point" data-zona="zona2" style="left: 65%; top: 22%;" title="Vista Alta"></button>
+        <button class="map-point" data-zona="zona3" style="left: 64%; top: 43%;" title="Panorámica"></button>
+        <button class="map-point" data-zona="zona4" style="left: 57%; top: 57%;" title="Canales"></button>
+        <button class="map-point" data-zona="zona5" style="left: 59%; top: 63%;" title="Vista Alta"></button>
+        <button class="map-point" data-zona="zona6" style="left: 55%; top: 82%;" title="Panorámica"></button>
+
+        <div id="gpsMarker"></div>
+      </div>
+    </div>
+    <div id="mapOverlay" class="map-overlay hidden">
+      <div class="map-expanded">
+        <div class="map-expanded-header">
+          <span>Mapa de navegación</span>
+          <button id="closeMapBtn">✕</button>
+        </div>
+        <div class="map-expanded-content" id="mapExpandedContent">
+          <!-- aquí se clona el mapa -->
+        </div>
+      </div>
+    </div>
+    <div id="infoModalOverlay" class="hidden">
+      <div class="info-card">
+        <div class="info-header">
+          <div>
+            <h2 id="infoCardTitle"></h2>
+            <h4 id="infoCardSubtitle"></h4>
+          </div>
+          <button id="closeInfoBtn">✕</button>
+        </div>
+        <div class="info-image">
+          <img id="infoCardImage" src="" alt="Imagen del lugar">
+        </div>
+        <div id="infoCardDescription" class="info-description">
+        </div>
+        <!-- Botones -->
+        <div class="info-actions">
+          <button id="playAudioBtn">
+            🎧 Escuchar
+          </button>
+          <button id="viewModelBtn">
+            🧊 Modelo 3D
+          </button>
+        </div>
+        <!-- Footer -->
+        <div class="info-footer">
+          <span id="infoLocation"></span>
+          <span id="infoReading"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+
+</html>

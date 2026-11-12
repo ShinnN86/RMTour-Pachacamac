@@ -1,0 +1,484 @@
+{
+  "zona1": [
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "Casa de las escogidas",
+      "descripcion": "Acllawasi, también conocido como Casa de las Escogidas, era un espacio destinado a mujeres seleccionadas para servir al Estado Inca. Estas mujeres elaboraban textiles finos, preparaban ofrendas y participaban en ceremonias religiosas.",
+      "imagen": "assets/img-text/Acllawasi.jpg",
+      "modeloUrl": "",
+      "audio": "audio/acllawasi.mp3",
+      "mostrarHotspot": true,
+      "camara": { "yaw": -0.6431, "pitch": -0.0468 },
+      "navegacion": {
+    "siguiente": {
+      "escena": 1,
+      "x": -82,
+      "y": -69,
+      "z": -30,
+      "rotacion": 17.90
+    }
+  }
+    },
+
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "Vista Interior",
+      "descripcion": "Descripción de la escena 2.",
+
+      "imagen": "assets/imagenes/acllawasi2.jpg",
+
+      "modeloUrl": "",
+
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -1.7030, "pitch": -0.2830 },
+      "navegacion": {
+        "anterior": {
+          "escena": 0,
+          "x": 186,
+          "y": -68,
+          "z": -14,
+          "rotacion": 9.05
+        },
+        "siguiente": {
+          "escena": 2,
+          "x": -90,
+          "y": -70,
+          "z": 17,
+          "rotacion": 19.05
+        }
+  }
+    },
+        {
+      "titulo": "Acllawasi",
+      "subtitulo": "",
+      "descripcion": "3",
+      "imagen": "",
+      "modeloUrl": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -2.1616, "pitch": -0.2015 },
+      "navegacion": {
+        "anterior": {
+          "escena": 1,
+          "x": 30,
+          "y": -67,
+          "z": -96,
+          "rotacion": 4.45
+        },
+        "siguiente": {
+          "escena": 3,
+          "x": -56,
+          "y": -68,
+          "z":36,
+          "rotacion": 13
+        }
+  }
+    },
+
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "",
+      "descripcion": "4",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -2.7782, "pitch": -0.1272 },
+      "navegacion": {
+    "anterior": {
+      "escena": 1,
+    
+       "x": 10,
+      "y": -70,
+      "z": -150
+    },
+    "siguiente": {
+      "escena": 3,
+       "x": 0,
+      "y": -70,
+      "z": 150
+    }
+  }
+       
+    },
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "",
+      "descripcion": "5",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -2.1384, "pitch": -0.0888 },
+      "navegacion": {
+    "anterior": {
+      "escena": 1,
+      "x": 0,
+      "y": -70,
+      "z": 150
+    },
+    "siguiente": {
+      "escena": 3,
+      "x": 10,
+      "y": -70,
+      "z": -150
+    }
+  }
+       
+    },
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "Vista General",
+      "descripcion": "6",
+      "imagen": "",
+      "modelo": "",
+      "audio": "audio/acllawasi.mp3",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -2.0489, "pitch": -0.0209 },
+      "navegacion": {
+    "anterior": {
+      "escena": 1,
+      "x": 0,
+      "y": -70,
+      "z": 150
+    },
+    "siguiente": {
+      "escena": 3,
+      "x": 10,
+      "y": -70,
+      "z": -150
+    }
+  }
+       
+    },
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "Vista General",
+      "descripcion": "7",
+      "imagen": "",
+      "modelo": "",
+      "audio": "audio/acllawasi.mp3",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -0.8526, "pitch": -0.0093 },
+      "navegacion": {
+    "anterior": {
+      "escena": 1,
+      "x": 0,
+      "y": -70,
+      "z": 150
+    },
+    "siguiente": {
+      "escena": 3,
+      "x": 10,
+      "y": -70,
+      "z": -150
+    }
+  }
+       
+    },
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "Vista General",
+      "descripcion": "8",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -1.2288, "pitch": 0.1050 },
+      "navegacion": {
+    "anterior": {
+      "escena": 1,
+      "x": 0,
+      "y": -70,
+      "z": 150
+    },
+    "siguiente": {
+      "escena": 3,
+      "x": 10,
+      "y": -70,
+      "z": -150
+    }
+  }
+       
+    },
+    {
+      "titulo": "Acllawasi",
+      "subtitulo": "Vista General",
+      "descripcion": "8",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+     "camara": { "yaw": -1.6980, "pitch": 0.0077 },
+      "navegacion": {
+    "anterior": {
+      "escena": 1,
+      "x": 0,
+      "y": -70,
+      "z": 150
+    },
+    "siguiente": {
+      "escena": 3,
+      "x": 10,
+      "y": -70,
+      "z": -150
+    }
+  }
+       
+    }
+    
+  ],
+
+  "zona2": [
+    {
+      "titulo": "Piramide Con Rampa",
+      "subtitulo": "Rampa 1",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 1.3657, "pitch": 0.0101 },
+      "navegacion": {
+    "anterior": {
+      "escena": 0,
+      "x": 0,
+      "y": -70,
+      "z": 150
+    },
+    "siguiente": {
+      "escena": 2,
+      "x": 10,
+      "y": -70,
+      "z": -150
+    }
+  }
+    },
+    {
+      "titulo": "Piramide Con Rampa",
+      "subtitulo": "Rampa 1",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 1.1703, "pitch": -0.1149 }
+    },
+    {
+      "titulo": "Piramide Con Rampa",
+      "subtitulo": "Rampa 1",
+      "descripcion": "Las pirámides con rampa son una de las estructuras más características del santuario de Pachacámac. Estas construcciones pertenecen principalmente a la cultura Ychsma y se utilizaban como centros administrativos y ceremoniales. Su diseño incluye una rampa central que conecta la base con la parte superior, lo que facilitaba el acceso a los espacios principales.",
+      "imagen": "assets/img-text/p1.jpg",
+      "modeloUrl": "https://shinnn86.github.io/Rampa/",
+      "audio": "audio/Rampa.mp3",
+      "mostrarHotspot": true,
+      "camara": { "yaw": -2.9955, "pitch": -0.0159 }
+
+      
+    },
+    {
+      "titulo": "Piramide Con Rampa",
+      "subtitulo": "Rampa 1",
+      "descripcion": "",
+      "imagen": "",
+      "modeloUrl": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 2.8686, "pitch": 0.0093 }
+
+      
+    }
+    ,
+    {
+      "titulo": "Piramide Con Rampa",
+      "subtitulo": "Rampa 1",
+      "descripcion": "",
+      "imagen": "",
+      "modeloUrl": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 1.0359, "pitch": 0.0078 }
+
+      
+    }
+  ],
+  "zona3": [
+    {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -0.0405, "pitch": 0.0192 }
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 0.1507, "pitch": 0.0227 }
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 0.0649, "pitch": 0.0057 }
+    },
+     {
+      "titulo": "Plaza de los Peregrinos",
+      "subtitulo": "Plaza de los Peregrinos",
+      "descripcion": "La Plaza de los Peregrinos era uno de los espacios más importantes del santuario, ya que funcionaba como punto de reunión para las personas que llegaban desde distintas regiones. Este espacio abierto permitía concentrar a grandes grupos de visitantes antes de ingresar a las áreas más sagradas. En esta plaza, los peregrinos realizaban diversas actividades previas a su ingreso al santuario, como rituales de purificación, ofrendas y ayunos.",
+      "imagen": "assets/img-text/Plazaperegrinos.jpg",
+      "modelo": "",
+      "audio": "audio/plaza.mp3",
+      "mostrarHotspot": true,
+      "camara": { "yaw": 1.5738, "pitch": 0.0420 }
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 1.6582, "pitch": 0.1070 }
+    }
+  ],
+  "zona4": [
+    {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 1.2256, "pitch": 0.1176 }
+    },
+    {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 1.4123, "pitch": 0.1662 }
+    },
+    {
+      "titulo": "Cementerio Max Uhle",
+      "subtitulo": "Cementerio Max Uhle",
+      "descripcion": "El Cementerio Max Uhle es uno de los sectores más importantes para el estudio arqueológico de Pachacámac. Fue excavado por el arqueólogo alemán Max Uhle, quien realizó importantes investigaciones en el sitio a inicios del siglo XX. En este cementerio se han encontrado numerosos entierros que permiten conocer las prácticas funerarias de las culturas que habitaron el santuario. Los cuerpos eran enterrados junto a objetos como cerámicas, textiles y alimentos, lo que indica creencias en la vida después de la muerte. Los hallazgos en este sector han permitido identificar diferencias sociales entre los individuos enterrados.",
+      "imagen": "assets/img-text/Cementerio.jpg",
+      "modelo": "",
+      "audio": "audio/cementerio.mp3",
+      "mostrarHotspot": true,
+      "camara": { "yaw": 0.0091, "pitch": 0.1164 }
+    }
+  ],
+  "zona5": [
+    {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 0.8700, "pitch": 0.1149 }
+    },
+     {
+      "titulo": "Templo Pintado",
+      "subtitulo": "Templo Pintado",
+      "descripcion": "El Templo Pintado es una de las estructuras más llamativas de Pachacámac debido a los restos de pintura que aún se conservan en sus muros. Este edificio fue construido principalmente durante la ocupación de la cultura Wari y destaca por su decoración con figuras geométricas y simbólicas. Las pinturas encontradas en este templo representan elementos relacionados con el mar, como peces y olas, lo que indica la importancia de este recurso en la vida de las culturas costeras. Estas representaciones también tienen un significado religioso, ya que estaban vinculadas a creencias sobre la fertilidad y la abundancia.",
+      "imagen": "assets/img-text/TemploPintado.jpg",
+      "modelo": "",
+      "audio": "audio/templo.mp3",
+      "mostrarHotspot": true,
+      "camara": { "yaw": 0.0199, "pitch": 0.1595 }
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 1.1259, "pitch": 0.1187 }
+    },
+     {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -0.1398, "pitch": 0.1754 }
+    }
+  ],
+  "zona6": [
+    {
+      "titulo": "Templo del Sol",
+      "subtitulo": "Monumento",
+      "descripcion": "Descripción de la zona 2.",
+      "imagen": "TemploSol/",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -2.8067, "pitch": 0.0385 }
+    },
+    {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -2.6018, "pitch": 0.1440 }
+    },
+    {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": -2.4807, "pitch": 0.1967 }
+    },
+    {
+      "titulo": "Templo del Sol",
+      "subtitulo": "Templo del Sol",
+      "descripcion": "El Templo del Sol es una de las estructuras más imponentes del santuario, construido durante el periodo Inca. Este edificio fue dedicado al culto del sol, una de las principales deidades del imperio incaico. La estructura presenta una gran pirámide con rampas y plataformas, desde donde se puede observar el valle de Lurín y el océano Pacífico. Su ubicación estratégica refuerza su importancia como centro ceremonial y de control territorial. ",
+      "imagen": "assets/img-text/TemploSol.jpg",
+      "modelo": "",
+      "audio": "audio/templosol.mp3",
+      "mostrarHotspot": true,
+      "camara": { "yaw": -1.7670, "pitch": 0.1584 }
+    },
+    {
+      "titulo": "",
+      "subtitulo": "",
+      "descripcion": "",
+      "imagen": "",
+      "modelo": "",
+      "audio": "",
+      "mostrarHotspot": false,
+      "camara": { "yaw": 0.1880, "pitch": 0.0275 }
+    }
+  ]
+}
