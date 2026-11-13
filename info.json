@@ -4,7 +4,7 @@
       "titulo": "Acllawasi",
       "subtitulo": "Casa de las escogidas",
       "descripcion": "Acllawasi, también conocido como Casa de las Escogidas, era un espacio destinado a mujeres seleccionadas para servir al Estado Inca. Estas mujeres elaboraban textiles finos, preparaban ofrendas y participaban en ceremonias religiosas.",
-      "imagen": "assets/img-text/Acllawasi.jpg",
+      "imagen": "assets/img-text/Acllawasi.JPG",
       "modeloUrl": "",
       "audio": "audio/acllawasi.mp3",
       "mostrarHotspot": true,
@@ -25,7 +25,7 @@
       "subtitulo": "Vista Interior",
       "descripcion": "Descripción de la escena 2.",
 
-      "imagen": "assets/imagenes/acllawasi2.jpg",
+      "imagen": "assets/imagenes/acllawasi2.JPG",
 
       "modeloUrl": "",
 
@@ -35,10 +35,10 @@
       "navegacion": {
         "anterior": {
           "escena": 0,
-          "x": 186,
-          "y": -68,
-          "z": -14,
-          "rotacion": 9.05
+          "x": 136,
+          "y": -69,
+          "z": -16,
+          "rotacion": 9.55
         },
         "siguiente": {
           "escena": 2,
@@ -87,17 +87,19 @@
       "camara": { "yaw": -2.7782, "pitch": -0.1272 },
       "navegacion": {
     "anterior": {
-      "escena": 1,
+      "escena": 2,
     
-       "x": 10,
-      "y": -70,
-      "z": -150
+       "x": 38,
+      "y": -69,
+      "z": -118,
+      "rotacion": 4.55
     },
     "siguiente": {
-      "escena": 3,
-       "x": 0,
-      "y": -70,
-      "z": 150
+      "escena": 4,
+       "x": -10,
+      "y": -68,
+      "z": 100,
+      "rotacion": 1.20
     }
   }
        
@@ -113,16 +115,18 @@
       "camara": { "yaw": -2.1384, "pitch": -0.0888 },
       "navegacion": {
     "anterior": {
-      "escena": 1,
-      "x": 0,
-      "y": -70,
-      "z": 150
+      "escena": 3,
+      "x": 96,
+      "y": -69,
+      "z": -72,
+      "rotacion": 3.55
     },
     "siguiente": {
-      "escena": 3,
-      "x": 10,
-      "y": -70,
-      "z": -150
+      "escena": 5,
+      "x": -84,
+      "y": -69,
+      "z": 46,
+      "rotacion": 6.90
     }
   }
        
@@ -138,16 +142,18 @@
       "camara": { "yaw": -2.0489, "pitch": -0.0209 },
       "navegacion": {
     "anterior": {
-      "escena": 1,
-      "x": 0,
-      "y": -70,
-      "z": 150
+      "escena": 4,
+      "x": -72,
+      "y": -71,
+      "z": 6,
+      "rotacion": 4.55
     },
     "siguiente": {
-      "escena": 3,
-      "x": 10,
+      "escena": 6,
+      "x": 114,
       "y": -70,
-      "z": -150
+      "z": 22,
+      "rotacion": 9.65
     }
   }
        
@@ -163,16 +169,18 @@
       "camara": { "yaw": -0.8526, "pitch": -0.0093 },
       "navegacion": {
     "anterior": {
-      "escena": 1,
-      "x": 0,
-      "y": -70,
-      "z": 150
+      "escena": 5,
+      "x": 88.00,
+      "y": -69.40,
+      "z": 74.00,
+      "rotacion": 15.10
     },
     "siguiente": {
-      "escena": 3,
-      "x": 10,
-      "y": -70,
-      "z": -150
+      "escena": 7,
+      "x": -88.00,
+      "y": -71.29,
+      "z": -70,
+      "rotacion": 5.60
     }
   }
        
@@ -188,16 +196,18 @@
       "camara": { "yaw": -1.2288, "pitch": 0.1050 },
       "navegacion": {
     "anterior": {
-      "escena": 1,
-      "x": 0,
-      "y": -70,
-      "z": 150
+      "escena": 6,
+      "x": 100,
+      "y": -68.74,
+      "z": 56,
+      "rotacion": 9.05
     },
     "siguiente": {
-      "escena": 3,
-      "x": 10,
-      "y": -70,
-      "z": -150
+      "escena": 8,
+      "x": -66,
+      "y": -68.60,
+      "z": -22,
+      "rotacion": 5.85
     }
   }
        
@@ -210,21 +220,7 @@
       "modelo": "",
       "audio": "",
       "mostrarHotspot": false,
-     "camara": { "yaw": -1.6980, "pitch": 0.0077 },
-      "navegacion": {
-    "anterior": {
-      "escena": 1,
-      "x": 0,
-      "y": -70,
-      "z": 150
-    },
-    "siguiente": {
-      "escena": 3,
-      "x": 10,
-      "y": -70,
-      "z": -150
-    }
-  }
+     "camara": { "yaw": -1.6980, "pitch": 0.0077 }
        
     }
     
@@ -241,17 +237,12 @@
       "mostrarHotspot": false,
       "camara": { "yaw": 1.3657, "pitch": 0.0101 },
       "navegacion": {
-    "anterior": {
-      "escena": 0,
-      "x": 0,
-      "y": -70,
-      "z": 150
-    },
     "siguiente": {
       "escena": 2,
-      "x": 10,
-      "y": -70,
-      "z": -150
+      "x": 94,
+      "y": -70.64,
+      "z": -62,
+      "rotacion": 3.35
     }
   }
     },
@@ -338,7 +329,7 @@
       "titulo": "Plaza de los Peregrinos",
       "subtitulo": "Plaza de los Peregrinos",
       "descripcion": "La Plaza de los Peregrinos era uno de los espacios más importantes del santuario, ya que funcionaba como punto de reunión para las personas que llegaban desde distintas regiones. Este espacio abierto permitía concentrar a grandes grupos de visitantes antes de ingresar a las áreas más sagradas. En esta plaza, los peregrinos realizaban diversas actividades previas a su ingreso al santuario, como rituales de purificación, ofrendas y ayunos.",
-      "imagen": "assets/img-text/Plazaperegrinos.jpg",
+      "imagen": "assets/img-text/Plazaperegrinos.JPG",
       "modelo": "",
       "audio": "audio/plaza.mp3",
       "mostrarHotspot": true,
@@ -380,7 +371,7 @@
       "titulo": "Cementerio Max Uhle",
       "subtitulo": "Cementerio Max Uhle",
       "descripcion": "El Cementerio Max Uhle es uno de los sectores más importantes para el estudio arqueológico de Pachacámac. Fue excavado por el arqueólogo alemán Max Uhle, quien realizó importantes investigaciones en el sitio a inicios del siglo XX. En este cementerio se han encontrado numerosos entierros que permiten conocer las prácticas funerarias de las culturas que habitaron el santuario. Los cuerpos eran enterrados junto a objetos como cerámicas, textiles y alimentos, lo que indica creencias en la vida después de la muerte. Los hallazgos en este sector han permitido identificar diferencias sociales entre los individuos enterrados.",
-      "imagen": "assets/img-text/Cementerio.jpg",
+      "imagen": "assets/img-text/Cementerio.JPG",
       "modelo": "",
       "audio": "audio/cementerio.mp3",
       "mostrarHotspot": true,
@@ -402,7 +393,7 @@
       "titulo": "Templo Pintado",
       "subtitulo": "Templo Pintado",
       "descripcion": "El Templo Pintado es una de las estructuras más llamativas de Pachacámac debido a los restos de pintura que aún se conservan en sus muros. Este edificio fue construido principalmente durante la ocupación de la cultura Wari y destaca por su decoración con figuras geométricas y simbólicas. Las pinturas encontradas en este templo representan elementos relacionados con el mar, como peces y olas, lo que indica la importancia de este recurso en la vida de las culturas costeras. Estas representaciones también tienen un significado religioso, ya que estaban vinculadas a creencias sobre la fertilidad y la abundancia.",
-      "imagen": "assets/img-text/TemploPintado.jpg",
+      "imagen": "assets/img-text/TemploPintado.JPG",
       "modelo": "",
       "audio": "audio/templo.mp3",
       "mostrarHotspot": true,
@@ -464,7 +455,7 @@
       "titulo": "Templo del Sol",
       "subtitulo": "Templo del Sol",
       "descripcion": "El Templo del Sol es una de las estructuras más imponentes del santuario, construido durante el periodo Inca. Este edificio fue dedicado al culto del sol, una de las principales deidades del imperio incaico. La estructura presenta una gran pirámide con rampas y plataformas, desde donde se puede observar el valle de Lurín y el océano Pacífico. Su ubicación estratégica refuerza su importancia como centro ceremonial y de control territorial. ",
-      "imagen": "assets/img-text/TemploSol.jpg",
+      "imagen": "assets/img-text/TemploSol.JPG",
       "modelo": "",
       "audio": "audio/templosol.mp3",
       "mostrarHotspot": true,
