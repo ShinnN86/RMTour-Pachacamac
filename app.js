@@ -1,7 +1,19 @@
+
+import { InfoPanelVR } from "./infoPanelVR.js";
+import { VRNavigation } from "./navigation.js";
 import * as THREE from "three";
 import { VRButton } from "three/addons/webxr/VRButton.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+
+let vrNavigation = null;
+let infoPanelVR = null;
+
+let navGazeStartTime = null;
+let navGazeTarget = null;
+
+const NAV_GAZE_DELAY = 1000;
 
 let vozLectura = null;
 let manifest = null;
@@ -162,6 +174,9 @@ async function init() {
 // THREE.JS
 function initThree() {
 
+
+
+
   const container =
     document.getElementById("panorama");
 
@@ -247,94 +262,187 @@ function initThree() {
     "mousemove",
     onSceneMouseMove
   );
+// celular
+
+
+  vrNavigation = new VRNavigation({
+
+  scene: scene,
+  camera: camera,
+  renderer: renderer,
+
+  onNext: () => {
+
+    if (!zonaActual) return;
+
+    if (
+      escenaActualIndex <
+      zonaActual.imagenes.length - 1
+    ) {
+
+      cargarEscena(escenaActualIndex + 1);
+
+    } else if (
+      zonaActualIndex <
+      manifest.zonas.length - 1
+    ) {
+
+      const siguienteZona =
+        manifest.zonas[zonaActualIndex + 1];
+
+      cargarZona(siguienteZona.id, 0);
+    }
+  },
+
+  onPrevious: () => {
+
+    if (!zonaActual) return;
+
+    if (escenaActualIndex > 0) {
+
+      cargarEscena(escenaActualIndex - 1);
+
+    } else if (zonaActualIndex > 0) {
+
+      const anteriorZona =
+        manifest.zonas[zonaActualIndex - 1];
+
+      cargarZona(
+        anteriorZona.id,
+        anteriorZona.imagenes.length - 1
+      );
+    }
+  }
+
+  
+
+});
 
   // HOTSPOT
 
   crearHotspotInfo();
 
+
+  // PANEL INFORMATIVO VR
+infoPanelVR = new InfoPanelVR({
+    scene,
+    camera,
+    renderer,
+
+    onClose: () => {
+        gazeStartTime = null;
+        infoAbiertaPorApuntado = false;
+
+        centerPointer?.classList.remove("active");
+
+        console.log("Panel informativo VR cerrado");
+    }
+});
+
   // ANIMACIÓN
 
-  renderer.setAnimationLoop(() => {
+// ANIMACIÓN
+renderer.setAnimationLoop(() => {
 
-    if (!renderer.xr.isPresenting) {
+    const enVR = renderer.xr.isPresenting;
 
-      if (gyroActivo) {
+    // CONTROLES NORMALES
+    if (!enVR) {
 
-        camera.rotation.order = "YXZ";
+        if (gyroActivo) {
 
-        camera.rotation.y = yaw;
-        camera.rotation.x = pitch;
+            camera.rotation.order = "YXZ";
+            camera.rotation.y = yaw;
+            camera.rotation.x = pitch;
 
-      } else {
+        } else {
 
-        controls.update();
-
-      }
+            controls.update();
+        }
     }
-    // HOTSPOT INFO
 
+    // NAVEGACIÓN VR
+    if (vrNavigation) {
+        vrNavigation.update();
+    }
+
+    // HOTSPOT INFORMACIÓN
     if (infoHotspot) {
 
-      infoHotspot.lookAt(
-        camera.position
-      );
+        const camaraVista = enVR
+            ? renderer.xr.getCamera(camera)
+            : camera;
 
-      const t =
-        performance.now() * 0.001;
+        const posicionVista = new THREE.Vector3();
 
-      // Animación de flotación
-      if (infoHotspot.userData.baseY !== undefined) {
+        camaraVista.getWorldPosition(posicionVista);
 
-        infoHotspot.position.y =
-          infoHotspot.userData.baseY +
-          Math.sin(t * 2) * 1.5;
-      }
+        infoHotspot.lookAt(posicionVista);
 
-      // Halo
-      const glow =
-        infoHotspot.getObjectByName("glow");
+        const t = performance.now() * 0.001;
 
-      if (glow) {
+        if (infoHotspot.userData.baseY !== undefined) {
 
-        glow.rotation.z += 0.01;
+            infoHotspot.position.y =
+                infoHotspot.userData.baseY +
+                Math.sin(t * 2) * 1.5;
+        }
 
-        glow.scale.setScalar(
-          1 + Math.sin(t * 4) * 0.08
-        );
-      }
+        const glow = infoHotspot.getObjectByName("glow");
+
+        if (glow) {
+
+            glow.rotation.z += 0.01;
+
+            glow.scale.setScalar(
+                1 + Math.sin(t * 4) * 0.08
+            );
+        }
     }
-    // BOTONES 3D
 
+    // BOTONES 3D
     navigationHotspots.forEach((nav) => {
 
-      if (!nav.visible) return;
+        if (!nav.visible) return;
 
-      const t =
-        performance.now() * 0.001;
+        const t = performance.now() * 0.001;
 
-      if (nav.userData.baseY !== undefined) {
+        if (nav.userData.baseY !== undefined) {
 
-        nav.position.y =
-          nav.userData.baseY +
-          Math.sin(
-            t * 2 + nav.userData.offset
-          ) * 1.5;
-      }
+            nav.position.y =
+                nav.userData.baseY +
+                Math.sin(t * 2 + nav.userData.offset) * 1.5;
+        }
 
-      // Rotación suave
-      if (nav.userData.rotar) {
-        nav.rotation.y += 0.005;
-      }
-
+        if (nav.userData.rotar) {
+            nav.rotation.y += 0.005;
+        }
     });
-    // APUNTADO AUTOMÁTICO
-    detectarApuntadoAutomatico();
 
-    renderer.render(
-      scene,
-      camera
-    );
-  });
+    // DETECCIÓN DE MIRADA
+      if (enVR) {
+        if (infoPanelVR) infoPanelVR.update();
+
+        if (!infoPanelVR?.visible) {
+            const navegando = detectarNavegacionVR();
+
+            if (!navegando) {
+                detectarHotspotInfoVR();
+            }
+        }
+    } else {
+        detectarApuntadoAutomatico();
+    }
+ 
+
+    // RENDERIZADO ÚNICO
+    renderer.render(scene, camera);
+});
+
+window.addEventListener("resize", onWindowResize);
+
+
+ 
 
   window.addEventListener(
     "resize",
@@ -342,7 +450,166 @@ function initThree() {
   );
 }
 
+
+
+function detectarNavegacionVR() {
+    if (
+        !renderer?.xr.isPresenting ||
+        !navigationHotspots.length ||
+        infoPanelVR?.visible
+    ) {
+        navGazeStartTime = null;
+        navGazeTarget = null;
+        return false;
+    }
+
+    const xrCamera = renderer.xr.getCamera(camera);
+
+    xrCamera.updateMatrixWorld(true);
+
+    const origen = new THREE.Vector3();
+    const quaternion = new THREE.Quaternion();
+
+    xrCamera.getWorldPosition(origen);
+    xrCamera.getWorldQuaternion(quaternion);
+
+    const direccion = new THREE.Vector3(0, 0, -1)
+        .applyQuaternion(quaternion)
+        .normalize();
+
+    raycaster.set(origen, direccion);
+
+    const intersecciones = raycaster.intersectObjects(
+        navigationHotspots,
+        true
+    );
+
+    if (intersecciones.length === 0) {
+        navGazeStartTime = null;
+        navGazeTarget = null;
+        centerPointer?.classList.remove("active");
+        return false;
+    }
+
+    // Encontrar el modelo principal de la flecha
+    let objetivo = intersecciones[0].object;
+
+    while (objetivo && !objetivo.userData.esNavegacion) {
+        objetivo = objetivo.parent;
+    }
+
+    if (!objetivo) {
+        navGazeStartTime = null;
+        navGazeTarget = null;
+        return false;
+    }
+
+    centerPointer?.classList.add("active");
+
+    // Si cambia la flecha observada, reiniciar el tiempo
+    if (navGazeTarget !== objetivo) {
+        navGazeTarget = objetivo;
+        navGazeStartTime = performance.now();
+    }
+
+    const tiempoMirando = performance.now() - navGazeStartTime;
+
+    // Activar navegación después de un segundo
+    if (tiempoMirando >= NAV_GAZE_DELAY) {
+        const boton = objetivo;
+
+        navGazeStartTime = null;
+        navGazeTarget = null;
+
+        centerPointer?.classList.remove("active");
+
+        ejecutarNavegacion(boton);
+    }
+
+    return true;
+}
+
+
+
 // MENÚ LUGARES
+
+
+
+// DETECCIÓN DEL HOTSPOT EN VR
+function detectarHotspotInfoVR() {
+
+    if (
+        !renderer?.xr.isPresenting ||
+        !infoHotspot ||
+        !infoPanelVR ||
+        !zonaActual
+    ) {
+        gazeStartTime = null;
+        return;
+    }
+
+    if (!infoHotspot.visible) {
+        gazeStartTime = null;
+        return;
+    }
+
+    const xrCamera = renderer.xr.getCamera(camera);
+
+    xrCamera.updateMatrixWorld(true);
+
+    const origen = new THREE.Vector3();
+    xrCamera.getWorldPosition(origen);
+
+    const quaternion = new THREE.Quaternion();
+    xrCamera.getWorldQuaternion(quaternion);
+
+    const direccion = new THREE.Vector3(0, 0, -1)
+        .applyQuaternion(quaternion)
+        .normalize();
+
+    raycaster.set(origen, direccion);
+
+    const intersecciones = raycaster.intersectObject(
+        infoHotspot,
+        true
+    );
+
+    if (intersecciones.length > 0) {
+
+        centerPointer?.classList.add("active");
+
+        if (gazeStartTime === null) {
+            gazeStartTime = performance.now();
+        }
+
+        const tiempoMirando =
+            performance.now() - gazeStartTime;
+
+        if (
+            tiempoMirando >= 1000 &&
+            !infoAbiertaPorApuntado
+        ) {
+
+            const data =
+                infoEscenas?.[zonaActual.id]?.[escenaActualIndex];
+
+            if (data && data.mostrarHotspot) {
+
+                infoAbiertaPorApuntado = true;
+
+                infoPanelVR.mostrar(data, infoHotspot);
+            }
+        }
+
+    } else {
+
+        gazeStartTime = null;
+        infoAbiertaPorApuntado = false;
+
+        centerPointer?.classList.remove("active");
+    }
+}
+
 
 function bindLugaresMenu() {
 
@@ -716,6 +983,11 @@ function actualizarBotonesNavegacion() {
       }
     );
   }
+
+
+
+
+
 
   // RETROCEDER
 
@@ -1305,9 +1577,9 @@ function actualizarPosicionHotspot() {
   ) {
 
     infoHotspot.position.set(
-      0,
-      -5,
-      130
+      70,
+      -35,
+      -200
     );
 
   } else if (
@@ -1315,9 +1587,9 @@ function actualizarPosicionHotspot() {
   ) {
 
     infoHotspot.position.set(
-      15,
-      -5,
-      125
+      90,
+      -15,
+      -165
     );
 
   } else if (
@@ -1335,17 +1607,37 @@ function actualizarPosicionHotspot() {
   ) {
 
     infoHotspot.position.set(
-      -18,
-      -12,
-      -112
+      -180,
+      15,
+      -100
     );
 
-  } else {
+  }else if (
+    zonaActual.id === "zona6"
+  ) {
 
     infoHotspot.position.set(
-      -160,
+      -50,
+      -75,
+      220
+    );
+
+  } else if (
+    zonaActual.id === "zona7"
+  ) {
+
+    infoHotspot.position.set(
+      -50,
+      -75,
+      220
+    );
+
+  }else {
+
+    infoHotspot.position.set(
+      160,
       20,
-      -120
+      -100
     );
   }
 
@@ -1408,6 +1700,10 @@ function actualizarHotspotInfo() {
 }
 // ABRIR INFO
 function abrirInfoEscena() {
+
+  if (renderer?.xr.isPresenting) {
+    return;
+}
 
   if (
     !zonaActual ||
